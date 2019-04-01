@@ -5,29 +5,70 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 
 class Deck(models.Model):
-    card = models.ForeignKey('Card', on_delete_model=CASCADE)
+    name = models.CharField(max_length=255)
+    category = models.CharField(max_length=50)
+    slug = models.SlugField(unique=True)
+    user = models.ForeignKey(User, on_delete=PROTECT)
+    favorited_by = models.ManyToMany(User, related_name="favorited")
+    
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        self.set_slug()
+        super().save(*args, **kwargs)
+
+    def set_slug(self):
+        # If the slug is already set, stop here.
+        if self.slug:
+            return
+        
+        base_slug = slugify(self.name)
+        slug = base_slug
+        n = 0
+
+        while Deck.objects.filter(slug=slug).count():
+            n += 1
+            slug = base_slug + "-" + str(n)
+        
+        self.slug = slug
+
+    # def get_absolute_url(self):
+    #     return reverse('deck_detail', args=[str(self.slug)])
 
 
 
-
-
-
-
-
-class Game(models.Model):
-    deck =     
+class Quiz(models.Model):
+    rounds = models.IntegerField()
+    user = models.ForeignKey('User', on_delete=CASCADE,)
+    deck = models.ForeignKey('Deck', on_delete=CASCADE,)
     
 
-
-
-
-
-
-
-
-
-
-
-
-
 class Card(models.Model):
+    decks = models.ManyToManyField('Deck', related_name='cards')
+    front = models.models.CharField(max_length=50)
+    reverse = models.models.models.CharField(max_length=50)
+    user = models.ForeignKey('User', on_delete=CASCADE)
+    slug = models.SlugField(unique=True)
+
+    def __str__(self):
+        return self.reverse
+
+    def save(self, *args, **kwargs):
+        self.set_slug()
+        super().save(*args, **kwargs)
+
+    def set_slug(self):
+        # If the slug is already set, stop here.
+        if self.slug:
+            return
+        
+        base_slug = slugify(self.reverse)
+        slug = base_slug
+        n = 0
+
+        while Card.objects.filter(slug=slug).count():
+            n += 1
+            slug = base_slug + "-" + str(n)
+        
+        self.slug = slug
