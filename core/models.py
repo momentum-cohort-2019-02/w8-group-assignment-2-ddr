@@ -8,8 +8,8 @@ class Deck(models.Model):
     name = models.CharField(max_length=255)
     category = models.CharField(max_length=50)
     slug = models.SlugField(unique=True)
-    user = models.ForeignKey(User, on_delete=PROTECT)
-    favorited_by = models.ManyToMany(User, related_name="favorited")
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    favorited_by = models.ManyToManyField(User, related_name="favorited")
     
     def __str__(self):
         return self.name
@@ -40,15 +40,15 @@ class Deck(models.Model):
 
 class Quiz(models.Model):
     rounds = models.IntegerField()
-    user = models.ForeignKey('User', on_delete=CASCADE,)
-    deck = models.ForeignKey('Deck', on_delete=CASCADE,)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,)
+    deck = models.ForeignKey(Deck, on_delete=models.CASCADE,)
     
 
 class Card(models.Model):
-    decks = models.ManyToManyField('Deck', related_name='cards')
-    front = models.models.CharField(max_length=50)
-    reverse = models.models.models.CharField(max_length=50)
-    user = models.ForeignKey('User', on_delete=CASCADE)
+    decks = models.ManyToManyField(Deck, related_name='cards')
+    front = models.CharField(max_length=50)
+    reverse = models.CharField(max_length=50)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(unique=True)
 
     def __str__(self):

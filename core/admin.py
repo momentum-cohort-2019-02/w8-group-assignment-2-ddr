@@ -6,9 +6,9 @@ from core.models import Deck, Card
 
 @admin.register(Deck)
 class DeckAdmin(admin.ModelAdmin):
-    prepopulated_fields= {'slug': ('name')}
+    prepopulated_fields= {'slug': ('name', )}
 
 
 @admin.register(Card)
 class CardAdmin(admin.ModelAdmin):
-    prepopulated_fields= {'slug': ('name')}
+    prepopulated_fields= {'slug': ('reverse', )}
