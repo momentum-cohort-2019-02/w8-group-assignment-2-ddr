@@ -47,7 +47,7 @@ class Quiz(models.Model):
 class Card(models.Model):
     decks = models.ManyToManyField(Deck, related_name='cards')
     front = models.CharField(max_length=50)
-    reverse = models.CharField(max_length=50)
+    back = models.CharField(max_length=50)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(unique=True)
 
