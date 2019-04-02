@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dino Cards {% block title %}{% endblock %}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- CSS CUSTOM -->
+   {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  {% block meta %}{% endblock %}
+</head>
+<body>
+    <div>
+        <div>
+            <a href="{% url 'index' %}">Home</a>
+            <div>
+                <h3>Dino Cards</h3>
+            </div>
+            <div>
+                <div>
+                    {% if request.user.is_authenticated %}
+                    <p><a href="{% url 'index' %}">{{ request.user }}</a></p>
+                    <p>|</p>
+                    <p><a href="{% url 'auth_logout' %}?next=/core/">Logout</a></p>
+                    {% else %}
+                    <p><a href="{% url 'auth_login' %}">Login</a></p>
+                    <p>|</p>
+                    <p><a href="{% url 'registration_register' %}">Register</a></p>
+                    {% endif %}
+                </div>
+                <div>{% block content %}{% endblock %}</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
