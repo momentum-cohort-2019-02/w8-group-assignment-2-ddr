@@ -5,15 +5,17 @@
 
     {% if deck_list %}
         {% for deck in deck_list %}
-            <div id="deck">
-                <div id="deck-title">
-                    <a href="{% url 'deck_detail' slug=deck.slug %}">{{ deck.name }}</a>
+            <a class="go-to-deck-link" href="{% url 'deck_detail' slug=deck.slug %}">
+                <div id="deck">
+                    <div id="deck-title">
+                        <p>{{ deck.name }}</p>
+                    </div>
+                    <div id="deck-info">
+                        <p>Category: {{ deck.category }}</p>
+                        <p>Created by: {{ deck.user }}</p>    
+                    </div>
                 </div>
-                <div id="deck-info">
-                    <p>Category: {{ deck.category }}</p>
-                    <p>Created by: {{ deck.user }}</p>    
-                </div>
-           </div>
+           </a>
         {% endfor %}
     {% endif %}
 
