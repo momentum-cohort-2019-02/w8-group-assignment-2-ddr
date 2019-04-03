@@ -9,7 +9,7 @@ class Deck(models.Model):
     category = models.CharField(max_length=50)
     slug = models.SlugField(unique=True)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
-    favorited_by = models.ManyToManyField(User, related_name="favorited", blank=True, null=True)
+    favorited_by = models.ManyToManyField(User, related_name="favorited", blank=True)
     
     def __str__(self):
         return self.name
@@ -47,12 +47,12 @@ class Quiz(models.Model):
 class Card(models.Model):
     decks = models.ManyToManyField(Deck, related_name='cards')
     front = models.CharField(max_length=50)
-    reverse = models.CharField(max_length=50)
+    back = models.CharField(max_length=50)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(unique=True)
 
     def __str__(self):
-        return self.reverse
+        return f"{self.front} | {self.back}"
 
     def save(self, *args, **kwargs):
         self.set_slug()

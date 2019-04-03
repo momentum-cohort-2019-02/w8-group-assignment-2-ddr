@@ -11,4 +11,4 @@ class DeckAdmin(admin.ModelAdmin):
 
 @admin.register(Card)
 class CardAdmin(admin.ModelAdmin):
-    prepopulated_fields= {'slug': ('reverse', )}
+    prepopulated_fields= {'slug': ('back', )}
