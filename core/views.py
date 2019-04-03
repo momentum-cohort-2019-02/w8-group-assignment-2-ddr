@@ -49,8 +49,9 @@ def card_edit_view():
 def create_card_view():
     pass
 
-def quiz_view():
-    pass
+def quiz_view(request, slug):
+    deck = Deck.objects.get(slug=slug)
+    return render(request, 'core/quiz.html', context = {'deck': deck})
 
 def user_page_view():
     pass

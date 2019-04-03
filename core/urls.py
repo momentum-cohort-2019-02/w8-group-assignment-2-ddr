@@ -9,7 +9,7 @@ urlpatterns = [
     path('cards/', views.card_list_view, name='card_list'),
     path('cards/<slug:slug>/edit/', views.card_edit_view, name='card_edit'),
     path('cards/create/', views.create_card_view, name='create_card'),
-    path('quiz/', views.quiz_view, name='quiz'),
+    path('decks/<slug:slug>/quiz', views.quiz_view, name='quiz'),
     # path('users/<user:username>', views.user_page_view, name='user_page'),
 
 ]
