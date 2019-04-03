@@ -4,33 +4,37 @@
   <title>Dino Cards {% block title %}{% endblock %}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
   <!-- CSS CUSTOM -->
    {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   {% block meta %}{% endblock %}
 </head>
 <body>
-    <div>
-        <div>
+    <div id="topbar">
+        <div id="navigation">
             <a href="{% url 'index' %}">Home</a>
-            <div>
-                <h3>Dino Cards</h3>
-            </div>
-            <div>
-                <div>
-                    {% if request.user.is_authenticated %}
-                    <p><a href="{% url 'index' %}">{{ request.user }}</a></p>
-                    <p>|</p>
-                    <p><a href="{% url 'auth_logout' %}?next=/core/">Logout</a></p>
-                    {% else %}
-                    <p><a href="{% url 'auth_login' %}">Login</a></p>
-                    <p>|</p>
-                    <p><a href="{% url 'registration_register' %}">Register</a></p>
-                    {% endif %}
-                </div>
-                <div>{% block content %}{% endblock %}</div>
+            <a href="{% url 'deck_list' %}">Decks</a>
+            <a href="{% url 'card_list' %}">Cards</a>
+            <a href="{% url 'quiz' %}">Quiz</a>
+        </div>
+        <div id="title">
+            <h3>Dino Cards</h3>
+        </div>
+        <div id="login-process">
+            <div id="user-login">
+                {% if request.user.is_authenticated %}
+                <p><a href="{% url 'index' %}">{{ request.user }}</a></p>
+                <p class="spacer">|</p>
+                <p><a href="{% url 'auth_logout' %}?next=/core/">Logout</a></p>
+                {% else %}
+                <p><a href="{% url 'auth_login' %}">Login</a></p>
+                <p class="spacer">|</p>
+                <p><a href="{% url 'registration_register' %}">Register</a></p>
+                {% endif %}
             </div>
         </div>
     </div>
+    <div>{% block content %}{% endblock %}</div>
 </body>
 </html>
