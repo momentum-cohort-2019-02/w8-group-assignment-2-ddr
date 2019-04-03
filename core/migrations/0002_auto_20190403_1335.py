@@ -11,9 +11,20 @@ def load_cards(apps, schema_editor):
     """Read CSV file of comment data and add it to the posts"""
     Card = apps.get_model('core', 'Card')
     User = apps.get_model('auth', 'User')
+    Deck = apps.get_model('core', 'Deck')
 
     datapath = os.path.join(settings.BASE_DIR, 'initial_data')
     datafile = os.path.join(datapath, 'cards.csv')
+
+    robsuser, _ = User.objects.get_or_create(username='robtest')
+    
+    deck = Deck(
+        user = robsuser,
+        name = 'robs_test_deck',
+        category = 'Identification',
+        slug = 'robs_test_deck',
+    )
+    deck.save()
 
     with open(datafile) as file:
         reader = csv.DictReader(file)
@@ -25,14 +36,16 @@ def load_cards(apps, schema_editor):
                 user = card_user,
                 front = row['front'],
                 back = row['back'],
-                slug = slugify(row['back'])[:50]
+                slug = slugify(row['front'] + row['back'])[:50]
             )
             card.save()
+
+            deck.cards.add(card)
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0002_auto_20190402_1704'),
+        ('core', '0001_initial'),
     ]
 
     operations = [migrations.RunPython(load_cards)
