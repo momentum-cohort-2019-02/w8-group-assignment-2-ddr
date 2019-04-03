@@ -1,0 +1,59 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+a {
+    color: black;
+}
+#topbar{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: lightblue;
+    border-bottom: 1px solid black;
+    margin-bottom: 1rem;
+}
+#navigation{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem;
+}
+
+#navigation > a {
+    margin: 1rem;
+}
+
+#title{
+    font-size: 30px;
+}
+#login-process{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#user-login{
+    display: flex;
+    margin: 1rem;  
+}
+
+#user-login > .spacer{
+    margin: 1rem;
+}
+
+#deck-list {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+#deck {
+    border: 1px solid black;
+    width: 200px;
+    height: 325px;
+    background-color: lightgray;
+    color: white;
+    margin: 2rem;
+    box-shadow: 0 0 10px darkgrey;
+    text-align: center;
+}
