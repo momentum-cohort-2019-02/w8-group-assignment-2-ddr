@@ -11,25 +11,28 @@
 </head>
 <body>
     <div>
-        <div>
+        <div id="navigation">
             <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'deck_list' %}">Decks</a>
+            <a href="{% url 'card_list' %}">Cards</a>
+            <a href="{% url 'quiz' %}">Quiz</a>
+        </div>
+        <div>
+            <h3>Dino Cards</h3>
+        </div>
+        <div>
             <div>
-                <h3>Dino Cards</h3>
+                {% if request.user.is_authenticated %}
+                <p><a href="{% url 'index' %}">{{ request.user }}</a></p>
+                <p>|</p>
+                <p><a href="{% url 'auth_logout' %}?next=/core/">Logout</a></p>
+                {% else %}
+                <p><a href="{% url 'auth_login' %}">Login</a></p>
+                <p>|</p>
+                <p><a href="{% url 'registration_register' %}">Register</a></p>
+                {% endif %}
             </div>
-            <div>
-                <div>
-                    {% if request.user.is_authenticated %}
-                    <p><a href="{% url 'index' %}">{{ request.user }}</a></p>
-                    <p>|</p>
-                    <p><a href="{% url 'auth_logout' %}?next=/core/">Logout</a></p>
-                    {% else %}
-                    <p><a href="{% url 'auth_login' %}">Login</a></p>
-                    <p>|</p>
-                    <p><a href="{% url 'registration_register' %}">Register</a></p>
-                    {% endif %}
-                </div>
-                <div>{% block content %}{% endblock %}</div>
-            </div>
+            <div>{% block content %}{% endblock %}</div>
         </div>
     </div>
 </body>

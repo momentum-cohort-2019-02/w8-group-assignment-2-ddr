@@ -24,7 +24,15 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 def deck_list_view(request):
-    pass
+    deck_list = Deck.objects.all()
+    user = User.objects.all()
+
+    context = {
+        'deck_list': deck_list,
+        'user': user,
+    }
+    # Render the HTML template index.html with the date in the context variable
+    return render(request, 'core/deck_list.html', context=context)
 
 def deck_detail_view():
     pass
