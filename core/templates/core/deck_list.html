@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="deck-list">
+
+    {% if deck_list %}
+        {% for deck in deck_list %}
+            <div id="deck">
+                <a href="{% url 'deck_detail' slug=deck.slug %}">{{ deck.name }}</a>
+                <p>Category: {{ deck.category }}</p>
+                <p>Created by: {{ deck.user }}</p>    
+           </div>
+        {% endfor %}
+    {% endif %}
+
+</div>
+
+
+
+
+
+{% endblock %}

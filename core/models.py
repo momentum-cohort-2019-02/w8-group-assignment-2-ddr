@@ -9,7 +9,7 @@ class Deck(models.Model):
     category = models.CharField(max_length=50)
     slug = models.SlugField(unique=True)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
-    favorited_by = models.ManyToManyField(User, related_name="favorited")
+    favorited_by = models.ManyToManyField(User, related_name="favorited", blank=True, null=True)
     
     def __str__(self):
         return self.name
