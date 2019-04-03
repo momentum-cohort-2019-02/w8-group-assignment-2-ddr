@@ -69,14 +69,17 @@ a {
     flex-wrap: wrap;
 }
 
+.go-to-deck-link{
+    display: block;
+    text-decoration: none;
+}
 #deck {
     border-left: 10px solid rgb(106, 113, 130);
-    /* border-bottom: 5px solid darkgray; */
     border-top: 10px solid rgb(199, 212, 242);
-    border-right: 5px solid white;
-    border-top-right-radius: 5%;
+    border-top-right-radius: 3.5%;
     border-bottom-left-radius: 5%;
-    border-bottom-right-radius: 5%;
+    border-bottom-right-radius: 2%;
+    box-shadow: -2px 5px 7px 1px darkgray;
     width: 200px;
     height: 325px;
     background-color: rgb(152, 166, 198);
@@ -92,4 +95,71 @@ a {
 
 #deck-info{
     margin-top: 12rem;
+}
+
+#cards-in-deck {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 5%;
+    margin-right: 5%;
+
+}
+.card-display {
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: column;
+    margin: 2rem;
+}
+.card-front {
+    border-left: 5px solid goldenrod;
+    border-right: 5px solid goldenrod;
+    border-top: 5px solid rgb(147, 111, 21);
+    border-bottom: 5px solid rgb(147, 111, 21);
+    box-shadow: -2px 5px 7px 1px darkgray;
+    width: 300px;
+    height: 150px;
+    background-color: rgb(153, 126, 172);
+    color: white;
+    text-align: center;
+}
+.card-title{
+    /* background-color: rgb(186, 166, 118); */
+    /* border: 2px solid rgb(181, 164, 123); */
+    font-size: 23px;
+}
+.card-info{
+    margin-left: 1rem;       
+    text-align-last: left;
+}
+
+.card-info > p {
+    margin: .5rem;
+}
+.card-back {
+    border-left: 5px solid goldenrod;
+    border-right: 5px solid goldenrod;
+    border-top: 5px solid rgb(175, 133, 25);
+    border-bottom: 5px solid rgb(147, 111, 21);
+    box-shadow: -2px 5px 7px 1px darkgray;
+    width: 300px;
+    height: 150px;
+    background-color: rgb(119, 99, 135);
+    color: white;
+    text-align: center;
+}
+.card-answer{
+    margin-top: 3.5rem;
+    font-size: 23px;
+}
+
+#cards-in-db {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.pagination{
+    margin-left: 45%;
+    margin-right: auto;
 }
