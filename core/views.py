@@ -34,14 +34,32 @@ def deck_list_view(request):
     # Render the HTML template index.html with the date in the context variable
     return render(request, 'core/deck_list.html', context=context)
 
-def deck_detail_view():
-    pass
+def deck_detail_view(request, slug):
+    deck = get_object_or_404(Deck, slug=slug)
+    paginator = Paginator(deck.cards.all(), 25)
+
+    page = request.GET.get('page')  
+    cards = paginator.get_page(page)
+    context = {
+        'cards': cards,   
+    }
+    # Render the HTML template index.html with the date in the context variable
+    return render(request, 'core/deck_detail.html', context=context)
 
 def create_deck_view():
     pass
 
-def card_list_view():
-    pass
+def card_list_view(request):
+    card_list = Card.objects.all()
+    paginator = Paginator(card_list, 25)
+
+    page = request.GET.get('page')  
+    cards = paginator.get_page(page)
+    context = {
+        'cards': cards,   
+    }
+    # Render the HTML template index.html with the date in the context variable
+    return render(request, 'core/card_list.html', context=context)
 
 def card_edit_view():
     pass
