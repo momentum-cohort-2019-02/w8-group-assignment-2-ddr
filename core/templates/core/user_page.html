@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="user-page">
+
+</div>
+
+<div>
+    <h2>Hi, {{user.username}}! These are your favorited books</h2>
+        {% if user.favorited.count %}
+        <ul>
+            {% for favorite in user.favorited.all %}
+               
+                <li> 
+                    <p>{{ favorite }}</p>
+                    
+                </li>
+           
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>There are no books on the site.</p> 
+        {% endif %}
+</div>
+
+
+{% endblock %}
+

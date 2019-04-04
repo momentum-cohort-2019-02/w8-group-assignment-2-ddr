@@ -36,7 +36,7 @@ def deck_list_view(request):
 
 def deck_detail_view(request, slug):
     deck = get_object_or_404(Deck, slug=slug)
-    paginator = Paginator(deck.cards.all(), 25)
+    paginator = Paginator(deck.cards.all(), 24)
 
     page = request.GET.get('page')  
     cards = paginator.get_page(page)
@@ -51,7 +51,7 @@ def create_deck_view():
 
 def card_list_view(request):
     card_list = Card.objects.all()
-    paginator = Paginator(card_list, 25)
+    paginator = Paginator(card_list, 24)
 
     page = request.GET.get('page')  
     cards = paginator.get_page(page)
@@ -61,14 +61,26 @@ def card_list_view(request):
     # Render the HTML template index.html with the date in the context variable
     return render(request, 'core/card_list.html', context=context)
 
-def card_edit_view():
-    pass
-
-def create_card_view():
-    pass
-
 def quiz_view():
     pass
 
-def user_page_view():
-    pass
+@require_http_methods(['POST'])
+@login_required
+def deck_favorite_view(request, slug):   
+    deck = get_object_or_404(Deck, slug=slug)
+
+    if deck in request.user.favorited.all():
+        request.user.favorited.remove(deck)
+        messages.success(request, f"You have favorited {deck.name}.")
+    else:
+        request.user.favorited.add(deck)
+        messages.info(request, f"You have unfavorited {deck.name}.")
+
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+@login_required
+def user_page_view(request):
+    # user = get_object_or_404(User)
+    
+    
+    return render(request, 'core/user_page.html')

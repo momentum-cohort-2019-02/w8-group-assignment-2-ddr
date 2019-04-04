@@ -5,6 +5,7 @@
 
     {% if deck_list %}
         {% for deck in deck_list %}
+        <div>
             <a class="go-to-deck-link" href="{% url 'deck_detail' slug=deck.slug %}">
                 <div id="deck">
                     <div id="deck-title">
@@ -16,6 +17,17 @@
                     </div>
                 </div>
            </a>
+            <form action="{% url 'deck_favorite' slug=deck.slug %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">
+                    {% if deck in request.user.favorited.all %}
+                        Unfavorite
+                    {% else %}
+                        Favorite
+                    {% endif %}
+                    this deck</button>
+             </form>
+        <div>
         {% endfor %}
     {% endif %}
 
