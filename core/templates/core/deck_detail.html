@@ -20,22 +20,18 @@
 
 <div id="cards-in-deck">
     {% for card in cards %}
-        <div class="card-display">
-            <div class="card-front">
-                <div class="card-title">
-                    <p>{{ card.front }}</p>
-                </div>
-                <div class="card-info">
-                    <p>Category: {{ card.category }}</p>   
-                </div>
-            </div>
-
-            <div class="card-back">
-                <div class="card-answer">
-                    <p>{{ card.back }}</p>   
+            <div class="scene">
+                <div class="card">
+                    <div class="card__face card__face--front">
+                        {{ card.front }}
+                    </div>
+                    <div class="card__face card__face--back">
+                        {{ card.back }}
+                    </div>
                 </div>
             </div>
-        </div>
+    {% load static %}
+    <script src="{% static 'js/flip.js' %}" defer></script>
     {% endfor %}
 </div>
 
