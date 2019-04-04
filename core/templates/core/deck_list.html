@@ -2,6 +2,15 @@
 {% block content %}
 
 <div id="deck-list">
+    <div class="add-deck deck">
+        <form method="POST" action="{% url 'create_deck' %}">
+        {% csrf_token %}
+        {{form.as_p}}
+            <button type="submit" class="">Create Deck </button>
+            {% comment %} <input type="text" placeholder="Enter the Deck Name">
+            <input type="text" placeholder="Enter the Category of the Deck"> {% endcomment %}
+        </form>
+    </div>
     {% if deck_list %}
         {% for deck in deck_list %}
         <div>
