@@ -21,7 +21,7 @@
 <div id="cards-in-deck">
     {% for card in cards %}
         <div class="card-display">
-            <div class="card-front">
+            <div class="card-face card-front">
                 <div class="card-title">
                     <p>{{ card.front }}</p>
                 </div>
@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            <div class="card-back">
+            <div class="card-face card-back">
                 <div class="card-answer">
                     <p>{{ card.back }}</p>   
                 </div>
