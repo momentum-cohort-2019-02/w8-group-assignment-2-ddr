@@ -2,25 +2,19 @@
 
 {% block content %}
 
-<div class="user-page">
-
-</div>
-
-<div>
-    <h2>Hi, {{user.username}}! These are your favorited books</h2>
+<div class="favorites-list">
+    <h2>Hi, {{user.username}}! These are your favorited decks</h2>
+        <div class="show-deck">
         {% if user.favorited.count %}
-        <ul>
-            {% for favorite in user.favorited.all %}
-               
-                <li> 
+            {% for favorite in user.favorited.all %}   
+                <div class="favorite-deck">
                     <p>{{ favorite }}</p>
-                    
-                </li>
-           
+                </div>
             {% endfor %}
-        </ul>
+        </div>
         {% else %}
-        <p>There are no books on the site.</p> 
+        <p>You haven't favorited any decks.</p>
+        <div class="sad-dino"></div>
         {% endif %}
 </div>
 

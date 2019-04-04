@@ -24,8 +24,8 @@
                         <p>Created by: {{ deck.user }}</p>    
                     </div>
                 </div>
-           </a>
-            <form action="{% url 'deck_favorite' slug=deck.slug %}" method="POST">
+            </a> 
+            <form class="fav-btn" action="{% url 'deck_favorite' slug=deck.slug %}" method="POST">
                 {% csrf_token %}
                 <button type="submit">
                     {% if deck in request.user.favorited.all %}
@@ -34,11 +34,10 @@
                         Favorite
                     {% endif %}
                     this deck</button>
-             </form>
-        <div>
+            </form>
+        </div>
         {% endfor %}
     {% endif %}
-
 </div>
 
 
