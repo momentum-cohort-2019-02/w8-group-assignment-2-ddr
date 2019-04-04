@@ -25,7 +25,7 @@
         <div id="login-process">
             <div id="user-login">
                 {% if request.user.is_authenticated %}
-                <p><a href="{% url 'index' %}">{{ request.user }}</a></p>
+                <p><a href="{% url 'user_page' %}">{{ request.user }}</a></p>
                 <p class="spacer">|</p>
                 <p><a href="{% url 'auth_logout' %}?next=/core/">Logout</a></p>
                 {% else %}
