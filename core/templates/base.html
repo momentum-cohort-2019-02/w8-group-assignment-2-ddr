@@ -16,6 +16,7 @@
         <div id="navigation">
             <a href="{% url 'index' %}">Home</a>
             <a href="{% url 'deck_list' %}">Decks</a>
+            {% comment %} <a href="{% url 'create_deck'%}">Create Deck</a> {% endcomment %}
             <a href="{% url 'card_list' %}">Cards</a>
             <a href="{% url 'quiz' slug='dinosaurs-by-era' %}">Quiz</a>
         </div>
