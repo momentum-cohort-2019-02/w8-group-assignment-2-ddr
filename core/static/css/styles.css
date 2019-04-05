@@ -210,8 +210,17 @@ body {
     background: #1A8449;
 }
 
+.if-card-face-front {
+    background: silver;
+}
+
 .card__face--back {
     background: rgb(18, 94, 52);
+    transform: rotateY(180deg);
+}
+
+.if-card-face-back {
+    background: grey;
     transform: rotateY(180deg);
 }
 

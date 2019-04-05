@@ -71,20 +71,11 @@ def edit_deck_view(request, slug):
     all_cards = card_paginator.get_page(page)
     context = {
         'deck_cards': deck_cards,
-        'all_cards': all_cards
+        'all_cards': all_cards,
+        'deck': deck,
     }
     # card_list = Card.objects.all()
     return render(request, 'core/deck_edit.html', context=context)
-
-# @login_required
-# def edit_deck_view(request, slug):
-#     deck = get_object_or_404(Deck, slug=slug)
-#     cards = Cart.objects.all()
-
-
-# class CreateDeck(CreateView):
-#     model = Deck
-#     fields = ['name']
 
 
 @require_http_methods(['POST'])
@@ -117,18 +108,19 @@ def card_list_view(request):
     # Render the HTML template index.html with the date in the context variable
     return render(request, 'core/card_list.html', context=context)
 
+
 def quiz_view(request, slug):
 
     deck = Deck.objects.get(slug=slug)
     cards = deck.cards.all()
     data = {}
     for i in range(cards.count()-1):
-        data[i]={'front':cards[i].front, 'back':cards[i].back}
+        data[i] = {'front': cards[i].front, 'back': cards[i].back}
 
     if request.is_ajax():
         return JsonResponse(data, content_type='application/json')
 
-    return render(request, 'core/quiz.html', context = {'deck': deck})
+    return render(request, 'core/quiz.html', context={'deck': deck})
 
 
 @require_http_methods(['POST'])
@@ -143,6 +135,22 @@ def deck_favorite_view(request, slug):
         request.user.favorited.add(deck)
         messages.info(request, f"You have unfavorited {deck.name}.")
 
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+@require_http_methods(['POST'])
+@login_required
+def add_or_remove_card(request, slug, card_slug):
+    deck = get_object_or_404(Deck, slug=slug)
+    card = get_object_or_404(Card, slug=card_slug)
+
+    if card in deck.cards.all():
+        deck.cards.remove(card)
+        messages.info(
+            request, f"You have removed {card.front} from {deck.name}")
+    else:
+        deck.cards.add(card)
+        messages.info(request, f"You have added {card.front} to {deck.name}")
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
