@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       updateBoxes()
       shuffle(availableCards)
-      console.log(box1)
     })
 
   correctCardButton.addEventListener('click', function (event) {
@@ -59,13 +58,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     refillAvailableCards()
     updateBoxes()
+    // console.log(box1, box2, box3, box4, box5)
   })
 
   wrongCardButton.addEventListener('click', function (event) {
     event.preventDefault()
 
     let currentCard = availableCards.shift()
-    console.log('shifted a card!')
 
     if (box5.includes(currentCard)) {
       console.log('something fucked up...')
@@ -83,6 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     refillAvailableCards()
     updateBoxes()
+    // console.log(box1, box2, box3, box4, box5)
   })
 
   function refillAvailableCards () {
