@@ -48,14 +48,38 @@
         {% for card in all_cards %}
                 <div class="edit-scene">
                     <div class="card">
+                    {% if card in deck_cards %}
+                        <div class="card__face if-card-face-front">
+                            {{ card.front }}
+                        </div>
+                    {% else %}
                         <div class="card__face card__face--front">
                             {{ card.front }}
                         </div>
+                    {% endif %}
+
+                    {% if card in deck_cards %}
+                        <div class="card__face if-card-face-back">
+                            {{ card.back }}
+                        </div>
+                    {% else %}
                         <div class="card__face card__face--back">
                             {{ card.back }}
                         </div>
+                    {% endif %}
                     </div>
                 </div>
+                {% comment %} {{ deck.slug}} {% endcomment %}
+                <form class="" action="{% url 'add_or_remove' slug=deck.slug card_slug=card.slug %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="fav-deck-btn">
+                    {% if  card in deck_cards %}
+                        Remove
+                    {% else %}
+                        Add
+                    {% endif %}
+                    this card</button>
+                </form> 
         {% load static %}
         <script src="{% static 'js/flip.js' %}" defer></script>
         {% endfor %}
