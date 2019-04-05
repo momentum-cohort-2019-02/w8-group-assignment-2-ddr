@@ -48,12 +48,25 @@
         {% for card in all_cards %}
                 <div class="edit-scene">
                     <div class="card">
+                    {% if card in deck_cards %}
+                        <div class="card__face if-card-face-front">
+                            {{ card.front }}
+                        </div>
+                    {% else %}
                         <div class="card__face card__face--front">
                             {{ card.front }}
                         </div>
+                    {% endif %}
+
+                    {% if card in deck_cards %}
+                        <div class="card__face if-card-face-back">
+                            {{ card.back }}
+                        </div>
+                    {% else %}
                         <div class="card__face card__face--back">
                             {{ card.back }}
                         </div>
+                    {% endif %}
                     </div>
                 </div>
         {% load static %}
