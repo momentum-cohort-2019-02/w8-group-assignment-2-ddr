@@ -55,20 +55,30 @@ def deck_detail_view(request, slug):
 @login_required
 def edit_deck_view(request, slug):
     card_list = Card.objects.all()
+    card_paginator = Paginator(card_list, 24)
+    page = request.GET.get('cards_page')
+    # try:
+    #     card_list = card_paginator.page(page)
+    # except:
+    #     card_list = card_paginator.page(1)
+
     deck = get_object_or_404(Deck, slug=slug)
     deck_paginator = Paginator(deck.cards.all(), 24)
-    card_paginator = Paginator(card_list, 24)
+    page1 = request.GET.get('deck_page')
 
-    cards_page = request.GET.get('cards_page')
-    deck_page = request.GET.get('deck_page')
-    deck_cards = deck_paginator.get_page(cards_page)
-    all_cards = card_paginator.get_page(deck_page)
+    deck_cards = deck_paginator.get_page(page1)
+    all_cards = card_paginator.get_page(page)
     context = {
         'deck_cards': deck_cards,
-        'all_cards': all_cards,
+        'all_cards': all_cards
     }
     # card_list = Card.objects.all()
     return render(request, 'core/deck_edit.html', context=context)
+
+# @login_required
+# def edit_deck_view(request, slug):
+#     deck = get_object_or_404(Deck, slug=slug)
+#     cards = Cart.objects.all()
 
 
 # class CreateDeck(CreateView):

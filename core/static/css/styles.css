@@ -133,19 +133,6 @@ body {
     margin-top: 12rem;
 }
 
-.all-cards {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 45%;
-    width: 45%;
-}
-
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
-
 .sub-header {
     text-align: center;
 }
@@ -165,11 +152,17 @@ body {
     margin: 1rem;
 }
 
-.scene {
-    width: 275px;
-    height: 200px;
-    margin: 40px 10px;
-    perspective: 600px;
+.all-cards {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 45%;
+    width: 45%;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 .edit-scene {
@@ -177,6 +170,13 @@ body {
     height: 9rem;
     margin: 4rem;
     perspective: 300px;
+}
+
+.scene {
+    width: 275px;
+    height: 200px;
+    margin: 40px 10px;
+    perspective: 600px;
 }
 
 .card {
@@ -313,4 +313,3 @@ form {
         color: white;
         text-decoration: none;
     }
-}
