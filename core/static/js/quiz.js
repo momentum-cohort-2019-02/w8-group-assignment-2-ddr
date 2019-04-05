@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
         box1.push(deckDict[card])
         numberOfCards += 1
       }
-      setUpCard()
+      setUpCards()
       updateBoxes()
       shuffle(availableCards)
     })
@@ -64,10 +64,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     flipCard(cardDiv)
-    resetCard(cardDiv)
     refillAvailableCards()
     updateBoxes()
-    // console.log(box1, box2, box3, box4, box5)
+    console.log(box1, box2, box3, box4, box5)
   })
 
   wrongCardButton.addEventListener('click', function (event) {
@@ -90,10 +89,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     flipCard(cardDiv)
-    resetCard(cardDiv)
+    // resetCard(cardDiv)
     refillAvailableCards()
     updateBoxes()
-    // console.log(box1, box2, box3, box4, box5)
+    console.log(box1, box2, box3, box4, box5)
   })
 
   function refillAvailableCards () {
@@ -102,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
         completeQuiz.innerHTML = `<div class="hooray">
                                     <h1>You finished the quiz!</h1>
                                     <h2>Way to go!</h2>
+                                    <div class="hooray-dino"></div>
                                   </div>`
       } else {
         for (let card in box1) {
@@ -121,7 +121,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  function setUpCard () {
+  function setUpCards () {
+    box1div.innerText = box1.length
+    box2div.innerText = box2.length
+    box3div.innerText = box3.length
+    box4div.innerText = box4.length
+    box5div.innerText = box5.length
     cardDiv.innerHTML = `<div class="card__face card__face--front">
                             <br> ${availableCards[0]['front']}
                           </div>
@@ -157,10 +162,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function flipCard (div) {
-    div.innerHTML = `<div class="card__face card__face--front">
-                        <br> ${availableCards[0]['front']}
-                      </div>
-                     `
     div.classList.remove("is-flipped")
   }
 
