@@ -3,16 +3,16 @@
 {% block content %}
 
 <div class="favorites-list">
-    <h2>Hi, {{user.username}}! These are your favorited decks</h2>
-        <div class="show-deck">
         {% if user.favorited.count %}
-            {% for favorite in user.favorited.all %}   
-                <div class="favorite-deck">
-                    <p>{{ favorite }}</p>
-                    <a class="link" href="{% url "deck_detail" slug=favorite.slug %}">More info<a>
-                </div>
-            {% endfor %}
-        </div>
+        <h2>Hi, {{user.username}}! These are your favorited decks</h2>
+            <div class="show-deck">
+                {% for favorite in user.favorited.all %}   
+                    <div class="favorite-deck">
+                        <p>{{ favorite }}</p>
+                        <a class="link" href="{% url "deck_detail" slug=favorite.slug %}">More info<a>
+                    </div>
+                {% endfor %}
+            </div>
         {% comment %} <form class="fav-deck" action="{% url "deck_favorite" slug=favorite.slug %}" method="POST">
             {% csrf_token %}
             <button type="submit" class="fav-deck-btn">
@@ -23,9 +23,11 @@
                 {% endif %}
                 this deck</button>
         </form> {% endcomment %}
-        {% else %}
-        <p>You haven't favorited any decks.</p>
+            {% else %}
+        <div>
+        <h2>Oh no, {{user.username}}, you haven't favorited any decks</h2>
         <div class="sad-dino"></div>
+        </div>
         {% endif %}
 </div>
 
