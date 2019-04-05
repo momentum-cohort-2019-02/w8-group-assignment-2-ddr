@@ -9,9 +9,20 @@
             {% for favorite in user.favorited.all %}   
                 <div class="favorite-deck">
                     <p>{{ favorite }}</p>
+                    <a class="link" href="{% url "deck_detail" slug=favorite.slug %}">More info<a>
                 </div>
             {% endfor %}
         </div>
+        {% comment %} <form class="fav-deck" action="{% url "deck_favorite" slug=favorite.slug %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="fav-deck-btn">
+                {% if favorite in request.user.favorited.all %}
+                    Unfavorite
+                {% else %}
+                    Favorite
+                {% endif %}
+                this deck</button>
+        </form> {% endcomment %}
         {% else %}
         <p>You haven't favorited any decks.</p>
         <div class="sad-dino"></div>

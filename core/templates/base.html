@@ -15,11 +15,10 @@
 <body>
     <div id="topbar">
         <div id="navigation">
-            <a href="{% url 'index' %}">Home</a>
-            <a href="{% url 'deck_list' %}">Decks</a>
+            <a class="link" href="{% url 'index' %}">Home</a>
+            <a class="link" href="{% url 'deck_list' %}">Decks</a>
             {% comment %} <a href="{% url 'create_deck'%}">Create Deck</a> {% endcomment %}
-            <a href="{% url 'card_list' %}">Cards</a>
-            <a href="{% url 'quiz' %}">Quiz</a>
+            <a class="link" href="{% url 'card_list' %}">Cards</a>   
         </div>
         <div id="title">
             <p>Dino Cards</p>
@@ -27,13 +26,13 @@
         <div id="login-process">
             <div id="user-login">
                 {% if request.user.is_authenticated %}
-                <p><a href="{% url 'user_page' %}">{{ request.user }}</a></p>
+                <p><a class="link" href="{% url 'user_page' %}">{{ request.user }}</a></p>
                 <p class="spacer">|</p>
-                <p><a href="{% url 'auth_logout' %}?next=/core/">Logout</a></p>
+                <p><a class="link" href="{% url 'auth_logout' %}?next=/core/">Logout</a></p>
                 {% else %}
-                <p><a href="{% url 'auth_login' %}">Login</a></p>
+                <p><a class="link" href="{% url 'auth_login' %}">Login</a></p>
                 <p class="spacer">|</p>
-                <p><a href="{% url 'registration_register' %}">Register</a></p>
+                <p><a class="link" href="{% url 'registration_register' %}">Register</a></p>
                 {% endif %}
             </div>
         </div>
