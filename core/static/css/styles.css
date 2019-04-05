@@ -2,6 +2,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     margin-bottom: 3rem;
 }
+
 .link {
     color: white;
     text-shadow: 1px 1px 2px black;
@@ -13,7 +14,7 @@ body {
     box-shadow: 1px 1px 2px rgb(0, 50, 8);
 }
 
-#topbar{
+#topbar {
     display: flex;
     flex-wrap: wrap;
     flex-flow: column;
@@ -25,7 +26,8 @@ body {
     color: white;
     text-decoration: none;
 }
-#navigation{
+
+#navigation {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -33,22 +35,24 @@ body {
     margin-left: 1rem;
 }
 
-#navigation > a {
+#navigation>a {
     margin: .5rem;
     margin-top: auto;
     margin-bottom: auto;
 }
 
-#title{
+#title {
     text-align: center;
     font-size: 50px;
     font-weight: 500;
 }
-#title > p {
+
+#title>p {
     margin-top: 1rem;
     margin-bottom: 0;
 }
-#login-process{
+
+#login-process {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -57,26 +61,26 @@ body {
     margin-right: 1rem;
 }
 
-#user-login{
+#user-login {
     display: flex;
-    margin: 1rem;  
-}
-
-#user-login > .spacer{
     margin: 1rem;
 }
 
-#home-page{
+#user-login>.spacer {
+    margin: 1rem;
+}
+
+#home-page {
     margin: 1rem;
     text-align: center;
     font-size: 20px;
 }
 
-#dino-pic{
+#dino-pic {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    background: 
+    background:
         url(cartoon-dino.png) center no-repeat;
     width: 400px;
     height: 400px;
@@ -86,7 +90,8 @@ body {
     display: flex;
     flex-wrap: wrap;
 }
-.go-to-deck-link{
+
+.go-to-deck-link {
     /* display: block; */
     text-decoration: none;
     background-color: white;
@@ -109,26 +114,29 @@ body {
     margin: 2rem 2rem 0 2rem;
     text-align: center;
 }
-.new-deck{
+
+.new-deck {
     margin: 1rem;
 }
-.add-deck-btn{
+
+.add-deck-btn {
     display: flex;
     justify-content: center;
 }
 
-.deck-title{
+.deck-title {
     margin-top: 1rem;
     font-size: 23px;
 }
 
-#deck-info{
+#deck-info {
     margin-top: 12rem;
 }
 
-.sub-header{
+.sub-header {
     text-align: center;
 }
+
 #cards-in-deck {
     display: flex;
     flex-wrap: wrap;
@@ -136,53 +144,75 @@ body {
     margin-right: 5%;
 
 }
+
 .card-display {
     display: flex;
     flex-wrap: wrap;
     flex-flow: column;
     margin: 1rem;
 }
+
+.all-cards {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 45%;
+    width: 45%;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.edit-scene {
+    width: 15rem;
+    height: 9rem;
+    margin: 4rem;
+    perspective: 300px;
+}
+
 .scene {
-  width: 275px;
-  height: 200px;
-  margin: 40px 10px;
-  perspective: 600px;
+    width: 275px;
+    height: 200px;
+    margin: 40px 10px;
+    perspective: 600px;
 }
 
 .card {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  transform-style: preserve-3d;
-  /* transform-origin: center right; */
-  transition: transform 1s;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    /* transform-origin: center right; */
+    transition: transform 1s;
 }
 
 .card.is-flipped {
-  transform: rotateY(180deg);
+    transform: rotateY(180deg);
 }
 
 .card__face {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  line-height: 44px;
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-size: 25px;
-  border: 2px solid black;
-  backface-visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    line-height: 44px;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+    border: 2px solid black;
+    backface-visibility: hidden;
 }
 
 .card__face--front {
-  background:#1A8449;
+    background: #1A8449;
 }
 
 .card__face--back {
-  background: rgb(18, 94, 52);
-  transform: rotateY(180deg);
+    background: rgb(18, 94, 52);
+    transform: rotateY(180deg);
 }
 
 #cards-in-db {
@@ -192,22 +222,24 @@ body {
     margin-right: 5%;
 }
 
-.pagination{
+.pagination {
     text-align: center;
 }
 
-.favorites-list{
+.favorites-list {
     display: flex;
     flex-wrap: wrap;
     flex-flow: column;
     justify-content: center;
     align-items: center;
 }
-.show-deck{
+
+.show-deck {
     display: flex;
     flex-wrap: wrap;
 }
-.favorite-deck{
+
+.favorite-deck {
     border-left: 10px solid rgb(18, 92, 51);
     border-top: 10px solid rgb(199, 212, 242);
     border-top-right-radius: 3.5%;
@@ -221,21 +253,22 @@ body {
     margin: 2rem;
     text-align: center;
 }
-.sad-dino{
+
+.sad-dino {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    background: 
+    background:
         url(oh-no-dino.jpg) center no-repeat;
     width: 600px;
     height: 500px;
 }
 
 button {
-    all: unset; 
+    all: unset;
 }
 
-.make-deck-btn{
+.make-deck-btn {
     color: white;
     text-shadow: 1px 1px 2px black;
     text-decoration: none;
@@ -243,17 +276,19 @@ button {
     background-color: #8FC34A;
     padding: 5px;
     border-radius: 35%;
-    box-shadow: 1px 1px 2px rgb(0, 50, 8); 
+    box-shadow: 1px 1px 2px rgb(0, 50, 8);
 }
+
 form {
     all: unset;
 }
 
-.fav-deck{
+.fav-deck {
     display: flex;
     justify-content: center;
 }
-.fav-deck-btn{
+
+.fav-deck-btn {
     color: white;
     text-shadow: 1px 1px 2px black;
     text-decoration: none;
@@ -261,20 +296,20 @@ form {
     background-color: #8FC34A;
     padding: 5px;
     border-radius: 35%;
-    box-shadow: 1px 1px 2px rgb(0, 50, 8); 
+    box-shadow: 1px 1px 2px rgb(0, 50, 8);
 }
 
-@media screen and (min-width: 768px){
+@media screen and (min-width: 768px) {
 
-#topbar{
-    display: flex;
-    flex-wrap: wrap;
-    flex-flow: row;
-    justify-content: space-between;
-    background-color: #1B8449;
-    border-bottom: 1px solid black;
-    margin-bottom: 1rem;
-    font-size: 20px;
-    color: white;
-    text-decoration: none;
-}
+    #topbar {
+        display: flex;
+        flex-wrap: wrap;
+        flex-flow: row;
+        justify-content: space-between;
+        background-color: #1B8449;
+        border-bottom: 1px solid black;
+        margin-bottom: 1rem;
+        font-size: 20px;
+        color: white;
+        text-decoration: none;
+    }
