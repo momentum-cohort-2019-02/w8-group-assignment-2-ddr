@@ -45,10 +45,24 @@ def deck_detail_view(request, slug):
     page = request.GET.get('page')
     cards = paginator.get_page(page)
     context = {
+        'deck': deck,
         'cards': cards,
     }
     # Render the HTML template index.html with the date in the context variable
     return render(request, 'core/deck_detail.html', context=context)
+
+
+@login_required
+def edit_deck_view(request, slug):
+    deck = get_object_or_404(Deck, slug=slug)
+    paginator = Paginator(deck.cards.all(), 24)
+    page = request.GET.get('page')
+    cards = paginator.get_page(page)
+    context = {
+        'cards': cards,
+    }
+    # card_list = Card.objects.all()
+    return render(request, 'core/deck_edit.html', context=context)
 
 
 # class CreateDeck(CreateView):
@@ -69,6 +83,9 @@ def create_deck_view(request):
     else:
         form = DeckForm()
     return render(request, 'core/deck_list.html', {'form': form, })
+
+
+# @require_http_methods(['POST'])
 
 
 def card_list_view(request):

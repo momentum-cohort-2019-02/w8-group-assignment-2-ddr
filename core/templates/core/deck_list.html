@@ -35,6 +35,10 @@
                     {% endif %}
                     this deck</button>
             </form>
+            <div>
+                <a class="" href="{% url 'deck_edit' slug=deck.slug %}">Edit Deck</a>
+            </div>
+
         </div>
         {% endfor %}
     {% endif %}
