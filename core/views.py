@@ -9,6 +9,7 @@ from django.core.paginator import Paginator
 from django.views.decorators.http import require_http_methods
 from django.http import HttpResponseRedirect, JsonResponse
 from django.forms.widgets import TextInput
+from django.core import serializers
 import datetime
 import json
 
@@ -85,7 +86,16 @@ def card_list_view(request):
     return render(request, 'core/card_list.html', context=context)
 
 def quiz_view(request, slug):
+
     deck = Deck.objects.get(slug=slug)
+    cards = deck.cards.all()
+    data = {}
+    for card in cards:
+        data[card.front]={'front':card.front, 'back':card.back}
+
+    if request.is_ajax():
+        return JsonResponse(data, content_type='application/json')
+
     return render(request, 'core/quiz.html', context = {'deck': deck})
 
 
