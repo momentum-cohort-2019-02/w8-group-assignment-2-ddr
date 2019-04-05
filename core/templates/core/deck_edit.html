@@ -69,6 +69,17 @@
                     {% endif %}
                     </div>
                 </div>
+                {% comment %} {{ deck.slug}} {% endcomment %}
+                <form class="" action="{% url 'add_or_remove' slug=deck.slug card_slug=card.slug %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="fav-deck-btn">
+                    {% if  card in deck_cards %}
+                        Remove
+                    {% else %}
+                        Add
+                    {% endif %}
+                    this card</button>
+                </form> 
         {% load static %}
         <script src="{% static 'js/flip.js' %}" defer></script>
         {% endfor %}
