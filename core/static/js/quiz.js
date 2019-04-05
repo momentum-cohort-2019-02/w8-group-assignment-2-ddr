@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const nextCardForm = document.querySelector('#next-card-form')
-  const nextCardButton = document.querySelector('#next-card-button')
+  const correctCardForm = document.querySelector('#correct-card-form')
+  const correctCardButton = document.querySelector('#correct-card-button')
+  const wrongCardButton = document.querySelector('#wrong-card-button')
   const gameStatus = document.querySelector('#game-status')
   const cardDiv = document.querySelector('#card')
   let deckDict = {}
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
   gameStatus.appendChild(box4div)
   gameStatus.appendChild(box5div)
 
-  fetch(nextCardForm.action, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+  fetch(correctCardForm.action, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
     .then(response => response.json())
     .then(function (response) {
       deckDict = response
@@ -37,9 +38,54 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log(box1)
     })
 
-  nextCardButton.addEventListener('click', function (event) {
+  correctCardButton.addEventListener('click', function (event) {
     event.preventDefault()
 
+    let currentCard = availableCards.shift()
+
+    if (box5.includes(currentCard)) {
+      console.log('something fucked up...')
+    } else if (box4.includes(currentCard)) {
+      box5.push(box4.splice(box4.indexOf(currentCard), 1)[0])
+    } else if (box3.includes(currentCard)) {
+      box4.push(box3.splice(box3.indexOf(currentCard), 1)[0])
+    } else if (box2.includes(currentCard)) {
+      box3.push(box2.splice(box2.indexOf(currentCard), 1)[0])
+    } else if (box1.includes(currentCard)) {
+      box2.push(box1.splice(box1.indexOf(currentCard), 1)[0])
+    } else {
+      console.log('card not in any of the boxes checked')
+    }
+
+    refillAvailableCards()
+    updateBoxes()
+  })
+
+  wrongCardButton.addEventListener('click', function (event) {
+    event.preventDefault()
+
+    let currentCard = availableCards.shift()
+    console.log('shifted a card!')
+
+    if (box5.includes(currentCard)) {
+      console.log('something fucked up...')
+    } else if (box4.includes(currentCard)) {
+      box1.push(box4.splice(box4.indexOf(currentCard), 1)[0])
+    } else if (box3.includes(currentCard)) {
+      box1.push(box3.splice(box3.indexOf(currentCard), 1)[0])
+    } else if (box2.includes(currentCard)) {
+      box1.push(box2.splice(box2.indexOf(currentCard), 1)[0])
+    } else if (box1.includes(currentCard)) {
+      box1.push(box1.splice(box1.indexOf(currentCard), 1)[0])
+    } else {
+      console.log('card not in any of the boxes checked')
+    }
+
+    refillAvailableCards()
+    updateBoxes()
+  })
+
+  function refillAvailableCards () {
     if (availableCards.length === 0) {
       if (box5.length === numberOfCards) {
         console.log('you win!')
@@ -59,26 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
         shuffle(availableCards)
       }
     }
-
-    let currentCard = availableCards.shift()
-
-    if (box5.includes(currentCard)) {
-      console.log('something fucked up...')
-    } else if (box4.includes(currentCard)) {
-      box5.push(box4.splice(box4.indexOf(currentCard), 1))
-    } else if (box3.includes(currentCard)) {
-      box4.push(box3.splice(box3.indexOf(currentCard), 1))
-    } else if (box2.includes(currentCard)) {
-      box3.push(box2.splice(box2.indexOf(currentCard), 1))
-    } else if (box1.includes(currentCard)) {
-      box2.push(box1.splice(box1.indexOf(currentCard), 1))
-    } else {
-      console.log('card not in any of the boxes checked')
-    }
-
-    updateBoxes()
-    console.log(box1, box2, box3, box4, box5)
-  })
+  }
 
   function updateBoxes () {
     box1div.innerText = box1.length
@@ -86,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
     box3div.innerText = box3.length
     box4div.innerText = box4.length
     box5div.innerText = box5.length
-    cardDiv.innerText = box1[0]['front']
+    cardDiv.innerText = availableCards[0]['front']
   }
 
   function shuffle (array) {

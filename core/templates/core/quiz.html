@@ -4,13 +4,13 @@
 
 {% block content %}
     <p>You are at the quiz page for the {{ deck }} deck</p>
-    <p id="game">
-        Game
-        <p id="card"></p>
-        <form id="next-card-form" method="GET" action="{% url 'quiz' slug=deck.slug %}">
-            <input type="button" id="next-card-button" value="next card">
-        </form>
-    <p>
+    <p id="card"></p>
+    <form id="correct-card-form" method="GET" action="{% url 'quiz' slug=deck.slug %}">
+        <input type="button" id="correct-card-button" value="I got that one!">
+    </form>
+    <form id="wrong-card-form" method="GET" action="{% url 'quiz' slug=deck.slug %}">
+        <input type="button" id="wrong-card-button" value="I missed that one...">
+    </form>
     <div id="game-status"></div>
     <script src="{% static 'js/quiz.js' %}" defer></script>
 
