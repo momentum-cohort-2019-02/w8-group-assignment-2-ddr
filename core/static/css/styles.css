@@ -136,6 +136,8 @@ body {
 .all-cards {
     display: flex;
     flex-wrap: wrap;
+    max-width: 45%;
+    width: 45%;
 }
 
 .card-container {
@@ -168,6 +170,13 @@ body {
     height: 200px;
     margin: 40px 10px;
     perspective: 600px;
+}
+
+.edit-scene {
+    width: 15rem;
+    height: 9rem;
+    margin: 4rem;
+    perspective: 300px;
 }
 
 .card {
