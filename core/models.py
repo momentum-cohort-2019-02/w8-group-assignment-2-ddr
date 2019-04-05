@@ -37,7 +37,6 @@ class Deck(models.Model):
     #     return reverse('deck_detail', args=[str(self.slug)])
 
 
-
 class Quiz(models.Model):
     rounds = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE,)
