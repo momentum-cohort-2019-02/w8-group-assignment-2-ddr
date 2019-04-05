@@ -7,8 +7,7 @@
   <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
   <!-- CSS CUSTOM -->
    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   {% block meta %}{% endblock %}
 </head>
 
@@ -17,7 +16,9 @@
         <div id="navigation">
             <a class="link" href="{% url 'index' %}">Home</a>
             <a class="link" href="{% url 'deck_list' %}">Decks</a>
-            <a class="link" href="{% url 'card_list' %}">Cards</a>
+            {% comment %} <a href="{% url 'create_deck'%}">Create Deck</a> {% endcomment %}
+            <a class="link" href="{% url 'card_list' %}">Cards</a>   
+            <a class="link" href="{% url 'quiz' slug='dinosaurs-by-era' %}">Quiz</a>   
         </div>
         <div id="title">
             <p>Dino Cards</p>
