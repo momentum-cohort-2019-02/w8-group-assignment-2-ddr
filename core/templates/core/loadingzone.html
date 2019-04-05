@@ -1,0 +1,30 @@
+<div class="pagination">
+    <span class="step-links">
+        {% if all_cards.has_previous %}
+            <a href="?cards_page=1">&laquo; first</a>
+            <a href="?cards_page={{ all_cards.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="current">
+            1 Page {{ all_cards.number }} of {{ all_cards.paginator.num_pages }}.
+        </span>
+        {% if all_cards.has_next %}
+            <a href="?cards_page={{ all_cards.next_page_number }}&deck_page={{deck_cards.number}}">next</a>
+            <a href="?cards_page={{ all_cards.paginator.num_pages }}&deck_page={{deck_cards.number}}">last &raquo;</a>
+        {% endif %}
+    </span>
+    </div>
+    <div class="pagination">
+    <span class="step-links">
+        {% if deck_cards.has_previous %}
+            <a href="?deck_page=1">&laquo; first</a>
+            <a href="?deck_page={{ deck_cards.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="current">
+            2 Page {{ deck_cards.number }} of {{ deck_cards.paginator.num_pages }}.
+        </span>
+        {% if deck_cards.has_next %}
+            <a href="?cards_page={{ all_cards.next_page_number }}&deck_page={{deck_cards.number}}">next</a>
+            <a href="?cards_page={{ all_cards.next_page_number }}&deck_page={{deck_cards.number}}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
