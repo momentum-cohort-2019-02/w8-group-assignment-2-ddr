@@ -122,6 +122,5 @@ def deck_favorite_view(request, slug):
 
 @login_required
 def user_page_view(request):
-    # user = get_object_or_404(User)
 
     return render(request, 'core/user_page.html')

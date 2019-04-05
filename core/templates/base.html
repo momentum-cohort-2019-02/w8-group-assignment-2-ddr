@@ -26,13 +26,13 @@
         <div id="login-process">
             <div id="user-login">
                 {% if request.user.is_authenticated %}
-                <p><a href="{% url 'user_page' %}">{{ request.user }}</a></p>
+                <p><a class="link" href="{% url 'user_page' %}">{{ request.user }}</a></p>
                 <p class="spacer">|</p>
-                <p><a href="{% url 'auth_logout' %}?next=/core/">Logout</a></p>
+                <p><a class="link" href="{% url 'auth_logout' %}?next=/core/">Logout</a></p>
                 {% else %}
-                <p><a href="{% url 'auth_login' %}">Login</a></p>
+                <p><a class="link" href="{% url 'auth_login' %}">Login</a></p>
                 <p class="spacer">|</p>
-                <p><a href="{% url 'registration_register' %}">Register</a></p>
+                <p><a class="link" href="{% url 'registration_register' %}">Register</a></p>
                 {% endif %}
             </div>
         </div>
