@@ -47,6 +47,7 @@ def deck_detail_view(request, slug):
     page = request.GET.get('page')
     cards = paginator.get_page(page)
     context = {
+        'deck': deck,
         'cards': cards,
     }
     # Render the HTML template index.html with the date in the context variable
@@ -116,6 +117,5 @@ def deck_favorite_view(request, slug):
 
 @login_required
 def user_page_view(request):
-    # user = get_object_or_404(User)
 
     return render(request, 'core/user_page.html')
