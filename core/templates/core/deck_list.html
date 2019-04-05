@@ -2,32 +2,39 @@
 {% block content %}
 
 <div id="deck-list">
-    <div class="add-deck deck">
-        <form method="POST" action="{% url 'create_deck' %}">
-        {% csrf_token %}
-        {{form.as_p}}
-            <button type="submit" class="">Create Deck </button>
-            {% comment %} <input type="text" placeholder="Enter the Deck Name">
-            <input type="text" placeholder="Enter the Category of the Deck"> {% endcomment %}
-        </form>
+    <div class="new-deck">
+        <div class="deck">
+            <p class="deck-title">Build a Deck</p>
+            <form method="POST" action="{% url 'create_deck' %}">
+            {% csrf_token %}
+            {{form.as_p}}
+                <button type="submit" class="make-deck-btn">Click here</button>
+                {% comment %} <input type="text" placeholder="Enter the Deck Name">
+                <input type="text" placeholder="Enter the Category of the Deck"> {% endcomment %}
+            </form>
+        </div>
     </div>
     {% if deck_list %}
         {% for deck in deck_list %}
         <div>
-            <a class="go-to-deck-link" href="{% url 'deck_detail' slug=deck.slug %}">
-                <div id="deck">
-                    <div id="deck-title">
+            <a class="go-to-deck-link link" href="{% url 'deck_detail' slug=deck.slug %}">
+                <div class="deck">
+                    <div class="deck-title">
                         <p>{{ deck.name }}</p>
                     </div>
                     <div id="deck-info">
+                        {% if deck.category %}
                         <p>Category: {{ deck.category }}</p>
+                        {% else %}
+                        <p>Category: N/A</p>
+                        {% endif %}
                         <p>Created by: {{ deck.user }}</p>    
                     </div>
                 </div>
             </a> 
-            <form class="fav-btn" action="{% url 'deck_favorite' slug=deck.slug %}" method="POST">
+            <form class="fav-deck" action="{% url 'deck_favorite' slug=deck.slug %}" method="POST">
                 {% csrf_token %}
-                <button type="submit">
+                <button type="submit" class="fav-deck-btn">
                     {% if deck in request.user.favorited.all %}
                         Unfavorite
                     {% else %}

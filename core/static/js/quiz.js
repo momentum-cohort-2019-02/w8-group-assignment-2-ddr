@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const game = document.querySelector('#game')
+  const game = document.querySelector('#game')
 
-    if (game !== null) {
-        
-    }
-        
+  if (game !== null) {
+
+  }
 })

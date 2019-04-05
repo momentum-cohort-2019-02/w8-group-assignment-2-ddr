@@ -1,9 +1,8 @@
 body {
-    font-family: Arial, Helvetica, sans-serif
-
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 3rem;
 }
-
-a {
+.link {
     color: white;
     text-shadow: 1px 1px 2px black;
     text-decoration: none;
@@ -13,9 +12,11 @@ a {
     border-radius: 35%;
     box-shadow: 1px 1px 2px rgb(0, 50, 8);
 }
+
 #topbar{
     display: flex;
     flex-wrap: wrap;
+    flex-flow: column;
     justify-content: space-between;
     background-color: #1B8449;
     border-bottom: 1px solid black;
@@ -27,7 +28,9 @@ a {
 #navigation{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     margin: .5rem;
+    margin-left: 1rem;
 }
 
 #navigation > a {
@@ -37,6 +40,7 @@ a {
 }
 
 #title{
+    text-align: center;
     font-size: 50px;
     font-weight: 500;
 }
@@ -50,6 +54,7 @@ a {
     justify-content: center;
     margin-top: auto;
     margin-bottom: auto;
+    margin-right: 1rem;
 }
 
 #user-login{
@@ -76,6 +81,7 @@ a {
     width: 400px;
     height: 400px;
 }
+
 #deck-list {
     display: flex;
     flex-wrap: wrap;
@@ -88,9 +94,10 @@ a {
     box-shadow: 0 0 0 white;
 }
 
-#deck {
+.deck {
+    transform: perspective(400px) rotateY(6deg);
     border-left: 10px solid rgb(18, 92, 51);
-    border-top: 10px solid rgb(199, 212, 242);
+    border-top: 4px solid rgb(199, 212, 242);
     border-top-right-radius: 3.5%;
     border-bottom-left-radius: 5%;
     border-bottom-right-radius: 2%;
@@ -99,15 +106,18 @@ a {
     height: 325px;
     background-color: #1A8449;
     color: white;
-    margin: 2rem;
+    margin: 2rem 2rem 0 2rem;
     text-align: center;
 }
-
-.fav-btn{
+.new-deck{
+    margin: 1rem;
+}
+.add-deck-btn{
     display: flex;
     justify-content: center;
 }
-#deck-title{
+
+.deck-title{
     margin-top: 1rem;
     font-size: 23px;
 }
@@ -116,6 +126,9 @@ a {
     margin-top: 12rem;
 }
 
+.sub-header{
+    text-align: center;
+}
 #cards-in-deck {
     display: flex;
     flex-wrap: wrap;
@@ -129,46 +142,47 @@ a {
     flex-flow: column;
     margin: 1rem;
 }
-.card-front {
-    border-left: 5px solid goldenrod;
-    border-right: 5px solid goldenrod;
-    border-top: 5px solid rgb(147, 111, 21);
-    border-bottom: 5px solid rgb(147, 111, 21);
-    box-shadow: -2px 5px 7px 1px darkgray;
-    width: 300px;
-    height: 150px;
-    background-color: #CB1D3B;
-    color: white;
-    text-align: center;
-}
-.card-title{
-    /* background-color: rgb(186, 166, 118); */
-    /* border: 2px solid rgb(181, 164, 123); */
-    font-size: 23px;
-}
-.card-info{
-    margin-left: 1rem;       
-    text-align-last: left;
+.scene {
+  width: 275px;
+  height: 200px;
+  margin: 40px 10px;
+  perspective: 600px;
 }
 
-.card-info > p {
-    margin: .5rem;
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  /* transform-origin: center right; */
+  transition: transform 1s;
 }
-.card-back {
-    border-left: 5px solid goldenrod;
-    border-right: 5px solid goldenrod;
-    border-top: 5px solid rgb(175, 133, 25);
-    border-bottom: 5px solid rgb(147, 111, 21);
-    box-shadow: -2px 5px 7px 1px darkgray;
-    width: 300px;
-    height: 150px;
-    background-color: rgb(150, 22, 43);
-    color: white;
-    text-align: center;
+
+.card.is-flipped {
+  transform: rotateY(180deg);
 }
-.card-answer{
-    margin-top: 3.5rem;
-    font-size: 23px;
+
+.card__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  line-height: 44px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 25px;
+  border: 2px solid black;
+  backface-visibility: hidden;
+}
+
+.card__face--front {
+  background:#1A8449;
+}
+
+.card__face--back {
+  background: rgb(18, 94, 52);
+  transform: rotateY(180deg);
 }
 
 #cards-in-db {
@@ -179,8 +193,7 @@ a {
 }
 
 .pagination{
-    margin-left: 45%;
-    margin-right: auto;
+    text-align: center;
 }
 
 .favorites-list{
@@ -216,4 +229,52 @@ a {
         url(oh-no-dino.jpg) center no-repeat;
     width: 600px;
     height: 500px;
+}
+
+button {
+    all: unset; 
+}
+
+.make-deck-btn{
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    text-decoration: none;
+    border: 2px solid rgb(164, 225, 85);
+    background-color: #8FC34A;
+    padding: 5px;
+    border-radius: 35%;
+    box-shadow: 1px 1px 2px rgb(0, 50, 8); 
+}
+form {
+    all: unset;
+}
+
+.fav-deck{
+    display: flex;
+    justify-content: center;
+}
+.fav-deck-btn{
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    text-decoration: none;
+    border: 2px solid rgb(164, 225, 85);
+    background-color: #8FC34A;
+    padding: 5px;
+    border-radius: 35%;
+    box-shadow: 1px 1px 2px rgb(0, 50, 8); 
+}
+
+@media screen and (min-width: 768px){
+
+#topbar{
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: row;
+    justify-content: space-between;
+    background-color: #1B8449;
+    border-bottom: 1px solid black;
+    margin-bottom: 1rem;
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
 }
