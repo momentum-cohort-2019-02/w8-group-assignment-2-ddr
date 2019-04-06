@@ -5,11 +5,15 @@
     <div class="new-deck">
         <div class="deck">
             <p class="deck-title">Build a Deck</p>
+            {% if request.user.is_authenticated %}
             <form method="POST" action="{% url 'create_deck' %}">
             {% csrf_token %}
             {{form.as_p}}
                 <button type="submit" class="make-deck-btn">Click here</button>
             </form>
+            {% else %}
+            <p>Please login to build a deck</p>
+            {% endif %}
         </div>
     </div>
     {% if deck_list %}
@@ -31,6 +35,7 @@
                 </div>
             </a>
             <div class="deck-options">
+                <a class="link" href="{% url 'quiz' slug=deck.slug %}">Take Quiz</a>
                 <form class="fav-deck" action="{% url 'deck_favorite' slug=deck.slug %}" method="POST">
                     {% csrf_token %}
                     <button type="submit" class="fav-deck-btn">

@@ -265,6 +265,11 @@ input[type=button]{
     align-items: center;
     text-align: center;
 }
+.fav-deck{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
 
 .show-deck {
     display: flex;
