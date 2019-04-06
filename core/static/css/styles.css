@@ -5,10 +5,11 @@ body {
 button {
     all: unset;
 }
-input {
+ 
+form {
     all: unset;
 }
-form {
+input[type=button]{
     all: unset;
 }
 
@@ -164,16 +165,26 @@ form {
 .all-cards {
     display: flex;
     flex-wrap: wrap;
+    flex-flow: column;
     max-width: 45%;
     width: 45%;
 }
 
+.edit-deck-title{
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+}
 .card-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
-
+.edit-deck-stack{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 .edit-scene {
     width: 15rem;
     height: 9rem;
@@ -182,9 +193,9 @@ form {
 }
 
 .scene {
-    width: 225px;
-    height: 150px;
-    margin: 40px 10px;
+    width: 200px;
+    height: 120px;
+    margin: 10px 10px;
     perspective: 600px;
 }
 
@@ -206,11 +217,11 @@ form {
     position: absolute;
     width: 100%;
     height: 100%;
-    line-height: 50px;
+    line-height: 40px;
     color: white;
     text-align: center;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 15px;
     border: 2px solid black;
     backface-visibility: hidden;
 }
@@ -242,6 +253,7 @@ form {
 
 .pagination {
     text-align: center;
+    margin-bottom: 1rem;
 }
 
 .favorites-list {
@@ -285,8 +297,9 @@ form {
     margin-right: auto;
     background:
         url(dino-fire.png) center no-repeat;
-    width: 600px;
-    height: 600px;
+    width: 300px;
+    height: 300px;
+    background-size: contain;
 
 }
 .sad-dino {
@@ -295,8 +308,9 @@ form {
     margin-right: auto;
     background:
         url(oh-no-dino.jpg) center no-repeat;
-    width: 600px;
-    height: 500px;
+    width: 300px;
+    height: 250px;
+    background-size: contain;
 }
 
 
@@ -307,10 +321,19 @@ form {
     border: 2px solid rgb(164, 225, 85);
     background-color: #8FC34A;
     padding: 5px;
-    border-radius: 35%;
+    border-radius: 10%;
     box-shadow: 1px 1px 2px rgb(0, 50, 8);
 }
 
+.deck-options{
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: column;
+    align-items: center;
+}
+.deck-edit {
+    margin: .8rem;
+}
 .fav-deck {
     display: flex;
     justify-content: center;
@@ -323,7 +346,7 @@ form {
     border: 2px solid rgb(164, 225, 85);
     background-color: #8FC34A;
     padding: 5px;
-    border-radius: 35%;
+    border-radius: 10%;
     box-shadow: 1px 1px 2px rgb(0, 50, 8);
 }
 
@@ -368,7 +391,7 @@ form {
     .scene {
     width: 275px;
     height: 200px;
-    margin: 40px 10px;
+    margin: 10px 10px;
     perspective: 600px;
     }
 
@@ -383,5 +406,27 @@ form {
     font-size: 25px;
     border: 2px solid black;
     backface-visibility: hidden;
-}
+    }
+
+    .hooray-dino{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background:
+        url(dino-fire.png) center no-repeat;
+    width: 600px;
+    height: 600px;
+    background-size: contain;
+
+    }
+    .sad-dino {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        background:
+            url(oh-no-dino.jpg) center no-repeat;
+        width: 600px;
+        height: 500px;
+        background-size: contain;
+    }
 }

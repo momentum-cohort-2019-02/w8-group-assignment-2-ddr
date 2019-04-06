@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
         box1.push(deckDict[card])
         numberOfCards += 1
       }
-      setUpCards()
+
       updateBoxes()
       shuffle(availableCards)
     })
@@ -89,7 +89,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     flipCard(cardDiv)
-    // resetCard(cardDiv)
     refillAvailableCards()
     updateBoxes()
     console.log(box1, box2, box3, box4, box5)
@@ -121,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  function setUpCards () {
+  function updateBoxes () {
     box1div.innerText = box1.length
     box2div.innerText = box2.length
     box3div.innerText = box3.length
@@ -133,14 +132,6 @@ document.addEventListener('DOMContentLoaded', function () {
                           <div class="card__face card__face--back">
                             <br> ${availableCards[0]['back']}
                           </div>`
-  }
-
-  function updateBoxes () {
-    box1div.innerText = box1.length
-    box2div.innerText = box2.length
-    box3div.innerText = box3.length
-    box4div.innerText = box4.length
-    box5div.innerText = box5.length
   }
 
   function shuffle (array) {
@@ -165,12 +156,4 @@ document.addEventListener('DOMContentLoaded', function () {
     div.classList.remove("is-flipped")
   }
 
-  function resetCard (div){
-    div.innerHTML = `<div class="card__face card__face--front">
-                        <br> ${availableCards[0]['front']}
-                      </div>
-                      <div class="card__face card__face--back">
-                        <br> ${availableCards[0]['back']}
-                      </div>`
-  } 
 })

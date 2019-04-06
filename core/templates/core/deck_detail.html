@@ -20,10 +20,10 @@
         {% endif %}
     </span>
 </div>
-{% comment %} {% for deck in deck_list %} {% endcomment %}
-    <div>
-        <a class="" href="{% url 'deck_edit' slug=deck.slug %}">Edit Deck</a>
+    <div class="deck-edit deck-options">
+        <a class="link" href="{% url 'deck_edit' slug=deck.slug %}">Edit Deck</a>
     </div>
+{% comment %} {% for deck in deck_list %} {% endcomment %}
 {% comment %} {% endfor %} {% endcomment %}
 <div id="cards-in-deck">
     {% for card in cards %}
