@@ -2,6 +2,8 @@
 
 {% block content %}
 
+
+{% comment %} We have an issue. You can only add/remove cards if both the card page and the deck page are the same. {% endcomment %}
 {% if all_cards %}
 <div class="pagination">
     {% for card in all_cards %}
