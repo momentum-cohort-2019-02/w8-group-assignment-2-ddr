@@ -271,6 +271,9 @@ input[type=button]{
     flex-wrap: wrap;
 }
 
+.fav-deck-link {
+    text-decoration: none;
+}
 .favorite-deck {
     border-left: 10px solid rgb(18, 92, 51);
     border-top: 10px solid rgb(199, 212, 242);
@@ -278,12 +281,13 @@ input[type=button]{
     border-bottom-left-radius: 5%;
     border-bottom-right-radius: 2%;
     box-shadow: -2px 5px 7px 1px darkgray;
-    width: 200px;
-    height: 325px;
+    width: 300px;
+    height: 180px;
     background-color: #1A8449;
     color: white;
     margin: 2rem;
     text-align: center;
+    line-height: 30px;
 }
 .hooray{
     display: flex;
@@ -430,4 +434,19 @@ input[type=button]{
         height: 500px;
         background-size: contain;
     }
+    .favorite-deck {
+    border-left: 10px solid rgb(18, 92, 51);
+    border-top: 10px solid rgb(199, 212, 242);
+    border-top-right-radius: 3.5%;
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 2%;
+    box-shadow: -2px 5px 7px 1px darkgray;
+    width: 200px;
+    height: 325px;
+    background-color: #1A8449;
+    color: white;
+    margin: 2rem;
+    text-align: center;
+    line-height: 50px;
+}
 }

@@ -21,11 +21,11 @@
                         <p>{{ deck.name }}</p>
                     </div>
                     <div id="deck-info">
-                        {% if deck.category %}
+                        {% comment %} {% if deck.category %}
                         <p>Category: {{ deck.category }}</p>
                         {% else %}
                         <p>Category: N/A</p>
-                        {% endif %}
+                        {% endif %} {% endcomment %}
                         <p>Created by: {{ deck.user }}</p>    
                     </div>
                 </div>
