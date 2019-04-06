@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 
 class Deck(models.Model):
     name = models.CharField(max_length=255)
-    category = models.CharField(max_length=50)
     slug = models.SlugField(unique=True)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     favorited_by = models.ManyToManyField(User, related_name="favorited", blank=True)
@@ -46,8 +45,9 @@ class Quiz(models.Model):
 class Card(models.Model):
     decks = models.ManyToManyField(Deck, related_name='cards')
     front = models.CharField(max_length=50)
+    front_image = models.ImageField(blank = True, null = True, upload_to='static/card_images/')
+    category = models.CharField(max_length=50)
     back = models.CharField(max_length=50)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(unique=True)
 
     def __str__(self):

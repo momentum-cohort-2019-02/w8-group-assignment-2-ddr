@@ -25,7 +25,6 @@ def load_easy_deck(apps, schema_editor):
             deck = Deck(
                 user = deck_user,
                 name = row['name'],
-                category = row['category'],
                 slug = slugify(row['name']),
             )
             deck.save()

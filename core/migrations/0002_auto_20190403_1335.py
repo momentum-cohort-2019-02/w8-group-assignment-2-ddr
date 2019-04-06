@@ -10,37 +10,22 @@ import csv
 def load_cards(apps, schema_editor):
     """Read CSV file of comment data and add it to the posts"""
     Card = apps.get_model('core', 'Card')
-    User = apps.get_model('auth', 'User')
     Deck = apps.get_model('core', 'Deck')
 
     datapath = os.path.join(settings.BASE_DIR, 'initial_data')
     datafile = os.path.join(datapath, 'cards.csv')
 
-    robsuser, _ = User.objects.get_or_create(username='robtest')
-    
-    deck = Deck(
-        user = robsuser,
-        name = 'robs_test_deck',
-        category = 'Identification',
-        slug = 'robs_test_deck',
-    )
-    deck.save()
-
     with open(datafile) as file:
         reader = csv.DictReader(file)
         for row in reader:
-
-            card_user, _ = User.objects.get_or_create(username=row['user'])
-
             card = Card(
-                user = card_user,
                 front = row['front'],
                 back = row['back'],
                 slug = slugify(row['front'] + row['back'])[:50]
+                category = row['category']
+                front_image = row['image']
             )
             card.save()
-
-            deck.cards.add(card)
 
 class Migration(migrations.Migration):
 
