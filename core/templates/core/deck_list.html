@@ -9,8 +9,6 @@
             {% csrf_token %}
             {{form.as_p}}
                 <button type="submit" class="make-deck-btn">Click here</button>
-                {% comment %} <input type="text" placeholder="Enter the Deck Name">
-                <input type="text" placeholder="Enter the Category of the Deck"> {% endcomment %}
             </form>
         </div>
     </div>
@@ -31,17 +29,27 @@
                         <p>Created by: {{ deck.user }}</p>    
                     </div>
                 </div>
-            </a> 
-            <form class="fav-deck" action="{% url 'deck_favorite' slug=deck.slug %}" method="POST">
-                {% csrf_token %}
-                <button type="submit" class="fav-deck-btn">
-                    {% if deck in request.user.favorited.all %}
-                        Unfavorite
-                    {% else %}
-                        Favorite
+            </a>
+            <div class="deck-options">
+                <form class="fav-deck" action="{% url 'deck_favorite' slug=deck.slug %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="fav-deck-btn">
+                        {% if deck in request.user.favorited.all %}
+                            Unfavorite
+                        {% else %}
+                            Favorite
+                        {% endif %}
+                        this deck</button>
+                </form>
+                {% if request.user.is_authenticated %}
+                    {% if request.user == deck.user %}
+                    <div class="deck-edit">
+                        <a class="link" href="{% url 'deck_edit' slug=deck.slug %}">Edit Deck</a>
+                    </div>
                     {% endif %}
-                    this deck</button>
-            </form>
+                {% endif %}
+            </div>
+
         </div>
         {% endfor %}
     {% endif %}

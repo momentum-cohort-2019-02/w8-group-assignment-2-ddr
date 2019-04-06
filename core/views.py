@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Deck, User, Card, Quiz
 from .forms import DeckForm
 from django.views import generic
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -54,9 +53,29 @@ def deck_detail_view(request, slug):
     return render(request, 'core/deck_detail.html', context=context)
 
 
-# class CreateDeck(CreateView):
-#     model = Deck
-#     fields = ['name']
+@login_required
+def edit_deck_view(request, slug):
+    card_list = Card.objects.all()
+    card_paginator = Paginator(card_list, 24)
+    page = request.GET.get('cards_page')
+    # try:
+    #     card_list = card_paginator.page(page)
+    # except:
+    #     card_list = card_paginator.page(1)
+
+    deck = get_object_or_404(Deck, slug=slug)
+    deck_paginator = Paginator(deck.cards.all(), 24)
+    page1 = request.GET.get('deck_page')
+
+    deck_cards = deck_paginator.get_page(page1)
+    all_cards = card_paginator.get_page(page)
+    context = {
+        'deck_cards': deck_cards,
+        'all_cards': all_cards,
+        'deck': deck,
+    }
+    # card_list = Card.objects.all()
+    return render(request, 'core/deck_edit.html', context=context)
 
 
 @require_http_methods(['POST'])
@@ -74,6 +93,9 @@ def create_deck_view(request):
     return render(request, 'core/deck_list.html', {'form': form, })
 
 
+# @require_http_methods(['POST'])
+
+
 def card_list_view(request):
     card_list = Card.objects.all()
     paginator = Paginator(card_list, 24)
@@ -86,18 +108,19 @@ def card_list_view(request):
     # Render the HTML template index.html with the date in the context variable
     return render(request, 'core/card_list.html', context=context)
 
+
 def quiz_view(request, slug):
 
     deck = Deck.objects.get(slug=slug)
     cards = deck.cards.all()
     data = {}
     for i in range(cards.count()-1):
-        data[i]={'front':cards[i].front, 'back':cards[i].back}
+        data[i] = {'front': cards[i].front, 'back': cards[i].back}
 
     if request.is_ajax():
         return JsonResponse(data, content_type='application/json')
 
-    return render(request, 'core/quiz.html', context = {'deck': deck})
+    return render(request, 'core/quiz.html', context={'deck': deck})
 
 
 @require_http_methods(['POST'])
@@ -112,6 +135,22 @@ def deck_favorite_view(request, slug):
         request.user.favorited.add(deck)
         messages.info(request, f"You have unfavorited {deck.name}.")
 
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+@require_http_methods(['POST'])
+@login_required
+def add_or_remove_card(request, slug, card_slug):
+    deck = get_object_or_404(Deck, slug=slug)
+    card = get_object_or_404(Card, slug=card_slug)
+
+    if card in deck.cards.all():
+        deck.cards.remove(card)
+        messages.info(
+            request, f"You have removed {card.front} from {deck.name}")
+    else:
+        deck.cards.add(card)
+        messages.info(request, f"You have added {card.front} to {deck.name}")
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 

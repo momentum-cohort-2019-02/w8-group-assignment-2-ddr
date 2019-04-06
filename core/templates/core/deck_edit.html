@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if all_cards %}
+<div class="pagination">
+    {% for card in all_cards %}
+    {% endfor %}
+    <span class="step-links">
+        {% if all_cards.has_previous %}
+            <a class="link" href="?cards_page=1&deck_page={{ deck_cards.number }}">&laquo; first</a>
+            <a class="link" href="?cards_page={{ all_cards.previous_page_number }}&deck_page={{deck_cards.number}}">previous</a>
+        {% endif %}
+        <span class="current">
+            Page {{ all_cards.number }} of {{ all_cards.paginator.num_pages }}.
+        </span>
+        {% if all_cards.has_next %}
+            <a class="link" href="?cards_page={{ all_cards.next_page_number }}&deck_page={{deck_cards.number}}">next</a>
+            <a class="link" href="?cards_page={{ all_cards.paginator.num_pages }}&deck_page={{deck_cards.number}}">last &raquo;</a>
+
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+{% if deck_cards %}
+<div class="pagination">
+    {% for card in deck_cards %}
+    {% endfor %}
+    <span class="step-links">
+        {% if deck_cards.has_previous %}
+            <a class="link" href="?cards_page={{ all_cards.number }}&deck_page=1">&laquo; first</a>
+            <a class="link" href="?cards_page={{ all_cards.number }}&deck_page={{ deck_cards.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="current">
+            Page {{ deck_cards.number }} of {{ deck_cards.paginator.num_pages }}.
+        </span>
+        {% if deck_cards.has_next %}
+            <a class="link" href="?cards_page={{ all_cards.number }}&deck_page={{deck_cards.next_page_number}}">next</a>
+            <a class="link" href="?cards_page={{ all_cards.number }}&deck_page={{deck_cards.paginator.num_pages}}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+
+<div class="card-container">
+    <div class="all-cards">
+        <p class="edit-deck-title">All Cards</p>
+        {% for card in all_cards %}
+            <div class="edit-deck-stack">
+                <div class="scene">
+                    <div class="card">
+                    {% if card in deck_cards %}
+                        <div class="card__face if-card-face-front">
+                            {{ card.front }}
+                        </div>
+                    {% else %}
+                        <div class="card__face card__face--front">
+                            {{ card.front }}
+                        </div>
+                    {% endif %}
+
+                    {% if card in deck_cards %}
+                        <div class="card__face if-card-face-back">
+                            {{ card.back }}
+                        </div>
+                    {% else %}
+                        <div class="card__face card__face--back">
+                            {{ card.back }}
+                        </div>
+                    {% endif %}
+                    </div>
+                </div>
+                <div>
+                    <form action="{% url 'add_or_remove' slug=deck.slug card_slug=card.slug %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="fav-deck-btn">
+                        {% if  card in deck_cards %}
+                            Remove
+                        {% else %}
+                            Add
+                        {% endif %}
+                        this card</button>
+                    </form>
+                </div>
+            </div>
+        {% load static %}
+        <script src="{% static 'js/flip.js' %}" defer></script>
+        {% endfor %}
+    </div>
+
+    <div class="all-cards">
+        <p class="edit-deck-title">Cards in Deck</p>
+        {% for card in deck_cards %}
+                <div class="scene">
+                    <div class="card">
+                        <div class="card__face card__face--front">
+                            {{ card.front }}
+                        </div>
+                        <div class="card__face card__face--back">
+                            {{ card.back }}
+                        </div>
+                    </div>
+                </div>
+        {% load static %}
+        <script src="{% static 'js/flip.js' %}" defer></script>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
