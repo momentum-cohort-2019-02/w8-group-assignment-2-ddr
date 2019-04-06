@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const wrongCardButton = document.querySelector('#wrong-card-button')
   const gameStatus = document.querySelector('#game-status')
   const cardDiv = document.querySelector('#card')
+  const completeQuiz = document.querySelector('.quiz')
   let deckDict = {}
   let availableCards = []
   let numberOfCards = 0
@@ -18,10 +19,15 @@ document.addEventListener('DOMContentLoaded', function () {
   let box3div = document.createElement('div')
   let box4div = document.createElement('div')
   let box5div = document.createElement('div')
+  box1div.classList.add('quiz-boxes')
   gameStatus.appendChild(box1div)
+  box2div.classList.add('quiz-boxes')
   gameStatus.appendChild(box2div)
+  box3div.classList.add('quiz-boxes')
   gameStatus.appendChild(box3div)
+  box4div.classList.add('quiz-boxes')
   gameStatus.appendChild(box4div)
+  box5div.classList.add('quiz-boxes')
   gameStatus.appendChild(box5div)
 
   fetch(correctCardForm.action, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
@@ -33,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
         box1.push(deckDict[card])
         numberOfCards += 1
       }
+
       updateBoxes()
       shuffle(availableCards)
     })
@@ -56,9 +63,10 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log('card not in any of the boxes checked')
     }
 
+    flipCard(cardDiv)
     refillAvailableCards()
     updateBoxes()
-    // console.log(box1, box2, box3, box4, box5)
+    console.log(box1, box2, box3, box4, box5)
   })
 
   wrongCardButton.addEventListener('click', function (event) {
@@ -80,15 +88,20 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log('card not in any of the boxes checked')
     }
 
+    flipCard(cardDiv)
     refillAvailableCards()
     updateBoxes()
-    // console.log(box1, box2, box3, box4, box5)
+    console.log(box1, box2, box3, box4, box5)
   })
 
   function refillAvailableCards () {
     if (availableCards.length === 0) {
       if (box5.length === numberOfCards) {
-        console.log('you win!')
+        completeQuiz.innerHTML = `<div class="hooray">
+                                    <h1>You finished the quiz!</h1>
+                                    <h2>Way to go!</h2>
+                                    <div class="hooray-dino"></div>
+                                  </div>`
       } else {
         for (let card in box1) {
           availableCards.push(box1[card])
@@ -113,7 +126,12 @@ document.addEventListener('DOMContentLoaded', function () {
     box3div.innerText = box3.length
     box4div.innerText = box4.length
     box5div.innerText = box5.length
-    cardDiv.innerText = availableCards[0]['front']
+    cardDiv.innerHTML = `<div class="card__face card__face--front">
+                            <br> ${availableCards[0]['front']}
+                          </div>
+                          <div class="card__face card__face--back">
+                            <br> ${availableCards[0]['back']}
+                          </div>`
   }
 
   function shuffle (array) {
@@ -133,4 +151,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     return array
   }
+
+  function flipCard (div) {
+    div.classList.remove("is-flipped")
+  }
+
 })

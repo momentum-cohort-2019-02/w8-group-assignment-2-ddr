@@ -3,15 +3,37 @@
 {% load static %}
 
 {% block content %}
+<div class="quiz">
     <p>You are at the quiz page for the {{ deck }} deck</p>
-    <p id="card"></p>
-    <form id="correct-card-form" method="GET" action="{% url 'quiz' slug=deck.slug %}">
+    <div id="cards-in-db">
+            <div class="scene">
+                <div id="card" class="card">
+                    <div class="card__face card__face--front">
+                        <p>{{ card.front }}</p>
+                    </div>
+                    <div class="card__face card__face--back">
+                        {{ card.back }}
+                    </div>
+                </div>
+            </div>
+        {% load static %}
+        <script src="{% static 'js/flip.js' %}" defer></script>
+    </div>
+    <div>
+    <form id="correct-card-form" class="link quiz-btn" method="GET" action="{% url 'quiz' slug=deck.slug %}">
         <input type="button" id="correct-card-button" value="I got that one!">
     </form>
-    <form id="wrong-card-form" method="GET" action="{% url 'quiz' slug=deck.slug %}">
+    <form id="wrong-card-form" class="link quiz-btn" method="GET" action="{% url 'quiz' slug=deck.slug %}">
         <input type="button" id="wrong-card-button" value="I missed that one...">
     </form>
-    <div id="game-status"></div>
+    </div>
+    <div class="instructions">
+        <p>Move the cards to the last box by guessing correctly.</p>
+        <p>A wrong guess will move the card back to the first box.</p>
+    </div>
+    <div id="game-status" class="quiz-status">
+    </div>
+    
     <script src="{% static 'js/quiz.js' %}" defer></script>
-
+</div> 
 {% endblock %}
