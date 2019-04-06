@@ -185,6 +185,7 @@ input[type=button]{
     flex-wrap: wrap;
     justify-content: center;
 }
+
 .edit-scene {
     width: 15rem;
     height: 9rem;
