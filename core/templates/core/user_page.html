@@ -7,9 +7,14 @@
         <h2>Hi, {{user.username}}! These are your favorited decks</h2>
             <div class="show-deck">
                 {% for favorite in user.favorited.all %}   
-                    <div class="favorite-deck">
-                        <p>{{ favorite }}</p>
-                        <a class="link" href="{% url "deck_detail" slug=favorite.slug %}">More info<a>
+                    <div class="fav-deck">
+                        <a class="fav-deck-link" href="{% url "deck_detail" slug=favorite.slug %}">
+                        <div class="favorite-deck">
+                            <p>{{ favorite }}</p>
+                            <p>Tap for more info</p>
+                        </div>
+                        </a>
+                        <a class="link" href="{% url 'quiz' slug=favorite.slug %}">Take Quiz</a>
                     </div>
                 {% endfor %}
             </div>
