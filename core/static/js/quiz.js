@@ -40,8 +40,9 @@ document.addEventListener('DOMContentLoaded', function () {
         numberOfCards += 1
       }
 
-      updateBoxes()
+      console.log(response)
       shuffle(availableCards)
+      updateBoxes()
     })
 
   correctCardButton.addEventListener('click', function (event) {
@@ -66,7 +67,8 @@ document.addEventListener('DOMContentLoaded', function () {
     flipCard(cardDiv)
     refillAvailableCards()
     updateBoxes()
-    console.log(box1, box2, box3, box4, box5)
+    // console.log(availableCards)
+    // console.log(box1, box2, box3, box4, box5)
   })
 
   wrongCardButton.addEventListener('click', function (event) {
@@ -91,7 +93,8 @@ document.addEventListener('DOMContentLoaded', function () {
     flipCard(cardDiv)
     refillAvailableCards()
     updateBoxes()
-    console.log(box1, box2, box3, box4, box5)
+    // console.log(availableCards)
+    // console.log(box1, box2, box3, box4, box5)
   })
 
   function refillAvailableCards () {
@@ -126,12 +129,21 @@ document.addEventListener('DOMContentLoaded', function () {
     box3div.innerText = box3.length
     box4div.innerText = box4.length
     box5div.innerText = box5.length
-    cardDiv.innerHTML = `<div class="card__face card__face--front">
+
+    if (availableCards[0]['front_image_path']) {
+      cardDiv.innerHTML = `<div class="card__face card__face--front" style="background: url(${availableCards[0]['front_image_path']}); background-size:contain; background-repeat: no-repeat; background-position: center;">
+                          </div>
+                          <div class="card__face card__face--back">
+                            <br> ${availableCards[0]['back']}
+                          </div>`
+    } else {
+      cardDiv.innerHTML = `<div class="card__face card__face--front">
                             <br> ${availableCards[0]['front']}
                           </div>
                           <div class="card__face card__face--back">
                             <br> ${availableCards[0]['back']}
                           </div>`
+    }
   }
 
   function shuffle (array) {

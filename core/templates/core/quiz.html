@@ -4,18 +4,13 @@
 
 {% block content %}
 <div class="quiz">
-    <p>You are at the quiz page for the {{ deck }} deck</p>
+    <p>Welcome to the '{{ deck }}' quiz!</p>
     <div id="cards-in-db">
             <div class="scene">
                 <div id="card" class="card">
-                    {% if card.front_image_path %}
-                        <div class="card__face card__face--front" style="background: url('{{ card.front_image_path }}'); background-size:contain; background-repeat: no-repeat; background-position: center;">
-                        </div>
-                    {% else %}
-                        <div class="card__face card__face--front">
-                            <br> {{ card.front }}
-                        </div>
-                    {% endif %}
+                    <div class="card__face card__face--front">
+                        <br> {{ card.front }}
+                    </div>
                     <div class="card__face card__face--back">
                         {{ card.back }}
                     </div>

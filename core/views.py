@@ -117,7 +117,7 @@ def quiz_view(request, slug):
     data = {}
     i=0
     for card in cards:
-        data[i] = {'front': card.front, 'back': card.back}
+        data[i] = {'front': card.front, 'back': card.back, 'front_image_path': card.front_image_path}
         i+=1
 
     if request.is_ajax():
