@@ -20,9 +20,11 @@
         {% endif %}
     </span>
 </div>
-    <div class="deck-edit deck-options">
-        <a class="link" href="{% url 'deck_edit' slug=deck.slug %}">Edit Deck</a>
-    </div>
+    {% if user == deck.user %}
+        <div class="deck-edit deck-options">
+            <a class="link" href="{% url 'deck_edit' slug=deck.slug %}">Edit Deck</a>
+        </div>
+    {% endif %}
 {% comment %} {% for deck in deck_list %} {% endcomment %}
 {% comment %} {% endfor %} {% endcomment %}
 <div id="cards-in-deck">
@@ -35,6 +37,7 @@
                     {% else %}
                         <div class="card__face card__face--front">
                             <br> {{ card.front }}
+                            <br> <div class = "card-category">{{ card.category }}</div>
                         </div>
                     {% endif %}
                     <div class="card__face card__face--back">

@@ -210,6 +210,11 @@ input[type=button]{
     transition: transform .25s;
 }
 
+.card-category {
+    font-weight: normal;
+    color: rgb(0, 61, 0);
+}
+
 .card.is-flipped {
     transform: rotateY(180deg);
 }
