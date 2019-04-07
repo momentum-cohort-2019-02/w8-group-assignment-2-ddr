@@ -113,9 +113,12 @@ def quiz_view(request, slug):
 
     deck = Deck.objects.get(slug=slug)
     cards = deck.cards.all()
+    print(cards)
     data = {}
-    for i in range(cards.count()-1):
-        data[i] = {'front': cards[i].front, 'back': cards[i].back}
+    i=0
+    for card in cards:
+        data[i] = {'front': card.front, 'back': card.back}
+        i+=1
 
     if request.is_ajax():
         return JsonResponse(data, content_type='application/json')
