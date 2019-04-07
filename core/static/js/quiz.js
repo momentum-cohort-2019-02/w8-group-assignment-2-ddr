@@ -153,7 +153,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function flipCard (div) {
-    div.classList.remove("is-flipped")
+    div.classList.remove('is-flipped')
   }
-
 })
