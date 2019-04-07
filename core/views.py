@@ -64,6 +64,7 @@ def edit_deck_view(request, slug):
     #     card_list = card_paginator.page(1)
 
     deck = get_object_or_404(Deck, slug=slug)
+    all_deck_cards = deck.cards.all()
     deck_paginator = Paginator(deck.cards.all(), 24)
     page1 = request.GET.get('deck_page')
 
@@ -71,6 +72,7 @@ def edit_deck_view(request, slug):
     all_cards = card_paginator.get_page(page)
     context = {
         'deck_cards': deck_cards,
+        'all_deck_cards': all_deck_cards,
         'all_cards': all_cards,
         'deck': deck,
     }

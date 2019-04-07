@@ -51,13 +51,14 @@
             <div class="edit-deck-stack">
                 <div class="scene">
                     <div class="card">
-                    {% if card in deck_cards %}
+                    {% if card in all_deck_cards %}
                         {% if card.front_image_path %}
                             <div class="card__face if-card-face-front" style="background: url('{{ card.front_image_path }}'); background-size:contain; background-repeat: no-repeat; background-position: center;">
                             </div>
                         {% else %}
                             <div class="card__face if-card-face-front">
                                 <br> {{ card.front }}
+                                <br> <div class = "card-category">{{ card.category }}</div>
                             </div>
                         {% endif %}
                     {% else %}
@@ -67,11 +68,12 @@
                         {% else %}
                             <div class="card__face card__face--front">
                                 <br> {{ card.front }}
+                                <br> <div class = "card-category">{{ card.category }}</div>
                             </div>
                         {% endif %}
                     {% endif %}
 
-                    {% if card in deck_cards %}
+                    {% if card in all_deck_cards %}
                         <div class="card__face if-card-face-back">
                             <br> {{ card.back }}
                         </div>
@@ -86,7 +88,7 @@
                     <form action="{% url 'add_or_remove' slug=deck.slug card_slug=card.slug %}" method="POST">
                     {% csrf_token %}
                     <button type="submit" class="fav-deck-btn">
-                        {% if  card in deck_cards %}
+                        {% if  card in all_deck_cards %}
                             Remove
                         {% else %}
                             Add
@@ -111,6 +113,7 @@
                         {% else %}
                             <div class="card__face card__face--front">
                                 <br> {{ card.front }}
+                                <br> <div class = "card-category">{{ card.category }}</div>
                             </div>
                         {% endif %}
                         <div class="card__face card__face--back">
