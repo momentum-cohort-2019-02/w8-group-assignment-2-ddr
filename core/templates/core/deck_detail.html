@@ -29,9 +29,14 @@
     {% for card in cards %}
             <div class="scene">
                 <div class="card">
-                    <div class="card__face card__face--front">
-                        <br> {{ card.front }}
-                    </div>
+                    {% if card.front_image_path %}
+                        <div class="card__face card__face--front" style="background: url('{{ card.front_image_path }}'); background-size:contain; background-repeat: no-repeat; background-position: center;">
+                        </div>
+                    {% else %}
+                        <div class="card__face card__face--front">
+                            <br> {{ card.front }}
+                        </div>
+                    {% endif %}
                     <div class="card__face card__face--back">
                         <br> {{ card.back }}
                     </div>
