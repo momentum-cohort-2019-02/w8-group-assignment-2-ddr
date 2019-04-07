@@ -139,6 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
       cardDiv.innerHTML = `<div class="card__face card__face--front">
                             <br> ${availableCards[0]['front']}
+                            <br> <div class = "card-category">${availableCards[0]['card_category']}</div>
                           </div>
                           <div class="card__face card__face--back">
                             <br> ${availableCards[0]['back']}
