@@ -128,6 +128,13 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static/'), 
 ]
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+
+    # Put your context processors here
+
+    'django.core.context_processors.request',
+)
+
 ACCOUNT_ACTIVATION_DAYS = 7
 LOGIN_REDIRECT_URL = '/'
 

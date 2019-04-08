@@ -107,6 +107,23 @@ def card_list_view(request):
     context = {
         'cards': cards,
     }
+
+    if request.is_ajax():
+        filtered_card_list = Card.objects.filter(front__icontains=request.GET.get('search'))
+        filtered_paginator = Paginator(filtered_card_list, 24)
+        filtered_cards = filtered_paginator.get_page(page)
+        filtered_context = {}
+        i=0
+        for card in filtered_cards:
+            filtered_context[i] = {
+                'front': card.front,
+                'back': card.back,
+                'front_image_path': card.front_image_path,
+                'card_category': card.category,
+                }
+            i+=1
+        return JsonResponse(filtered_context, content_type='application/json')
+
     # Render the HTML template index.html with the date in the context variable
     return render(request, 'core/card_list.html', context=context)
 

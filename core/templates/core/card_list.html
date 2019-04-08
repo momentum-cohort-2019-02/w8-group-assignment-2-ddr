@@ -4,6 +4,9 @@
 
 {% block content %}
 
+<input class="search-bar">
+<button class="search-button" data-action="{{ request.get_full_path }}">Search</button>
+
 <div class="pagination">
     <span class="step-links">
         {% if cards.has_previous %}
@@ -39,9 +42,10 @@
                 </div>
             </div>
     {% load static %}
-    <script src="{% static 'js/flip.js' %}" defer></script>
     {% endfor %}
 </div>
 
+<script src="{% static 'js/flip.js' %}" defer></script>
+<script src="{% static 'js/card_sort_and_search.js' %}" defer></script>
 
 {% endblock %}
