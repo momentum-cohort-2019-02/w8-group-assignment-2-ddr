@@ -58,10 +58,6 @@ def edit_deck_view(request, slug):
     card_list = Card.objects.all()
     card_paginator = Paginator(card_list, 24)
     page = request.GET.get('cards_page')
-    # try:
-    #     card_list = card_paginator.page(page)
-    # except:
-    #     card_list = card_paginator.page(1)
 
     deck = get_object_or_404(Deck, slug=slug)
     all_deck_cards = deck.cards.all()
@@ -76,8 +72,63 @@ def edit_deck_view(request, slug):
         'all_cards': all_cards,
         'deck': deck,
     }
-    # card_list = Card.objects.all()
     return render(request, 'core/deck_edit.html', context=context)
+
+
+@login_required
+def new_edit_deck_view(request, slug):
+    deck = get_object_or_404(Deck, slug=slug)
+    deck_cards = deck.cards.all()
+    cards = Card.objects.all()
+    data = {}
+    # data = {'all_cards': {}, 'deck_cards': {}}
+    data['all_cards'] = {}
+    data['deck_cards'] = {}
+    i = 0
+    x = 0
+    for card in cards:
+        data['all_cards'][i] = {
+            'front': card.front,
+            'back': card.back,
+            'front_image_path': card.front_image_path,
+            'card_category': card.category,
+        }
+        i += 1
+
+    for card in deck_cards:
+        data['deck_cards'][x] = {
+            'front': card.front,
+            'back': card.back,
+            'front_image_path': card.front_image_path,
+            'card_category': card.category,
+        }
+        x += 1
+
+    context = {
+        'deck_cards': deck_cards,
+        'all_cards': cards,
+    }
+
+    if request.is_ajax():
+        return JsonResponse(data, content_type='application/json', safe=True)
+
+    return render(request, 'core/new_edit.html', context=context)
+
+
+@require_http_methods(['POST'])
+@login_required
+def add_or_remove_card(request, slug, card_slug):
+    deck = get_object_or_404(Deck, slug=slug)
+    card = get_object_or_404(Card, slug=card_slug)
+
+    if card in deck.cards.all():
+        deck.cards.remove(card)
+        messages.info(
+            request, f"You have removed {card.front} from {deck.name}")
+    else:
+        deck.cards.add(card)
+        messages.info(request, f"You have added {card.front} to {deck.name}")
+    return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
 @require_http_methods(['POST'])
@@ -117,15 +168,15 @@ def quiz_view(request, slug):
     cards = deck.cards.all()
     print(cards)
     data = {}
-    i=0
+    i = 0
     for card in cards:
         data[i] = {
             'front': card.front,
             'back': card.back,
             'front_image_path': card.front_image_path,
             'card_category': card.category
-            }
-        i+=1
+        }
+        i += 1
 
     if request.is_ajax():
         return JsonResponse(data, content_type='application/json')
@@ -145,22 +196,6 @@ def deck_favorite_view(request, slug):
         request.user.favorited.add(deck)
         messages.info(request, f"You have unfavorited {deck.name}.")
 
-    return redirect(request.META.get('HTTP_REFERER', '/'))
-
-
-@require_http_methods(['POST'])
-@login_required
-def add_or_remove_card(request, slug, card_slug):
-    deck = get_object_or_404(Deck, slug=slug)
-    card = get_object_or_404(Card, slug=card_slug)
-
-    if card in deck.cards.all():
-        deck.cards.remove(card)
-        messages.info(
-            request, f"You have removed {card.front} from {deck.name}")
-    else:
-        deck.cards.add(card)
-        messages.info(request, f"You have added {card.front} to {deck.name}")
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 

@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+{% comment %} We have an issue. You can only add/remove cards if both the card page and the deck page are the same. {% endcomment %}
+{% if all_cards %}
+<div class="pagination">
+    {% for card in all_cards %}
+    {% endfor %}
+    <span class="step-links">
+        {% if all_cards.has_previous %}
+            <a class="link" href="?cards_page=1&deck_page={{ deck_cards.number }}">&laquo; first</a>
+            <a class="link" href="?cards_page={{ all_cards.previous_page_number }}&deck_page={{deck_cards.number}}">previous</a>
+        {% endif %}
+        <span class="current">
+            Page {{ all_cards.number }} of {{ all_cards.paginator.num_pages }}.
+        </span>
+        {% if all_cards.has_next %}
+            <a class="link" href="?cards_page={{ all_cards.next_page_number }}&deck_page={{deck_cards.number}}">next</a>
+            <a class="link" href="?cards_page={{ all_cards.paginator.num_pages }}&deck_page={{deck_cards.number}}">last &raquo;</a>
+
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+{% if deck_cards %}
+<div class="pagination">
+    {% for card in deck_cards %}
+    {% endfor %}
+    <span class="step-links">
+        {% if deck_cards.has_previous %}
+            <a class="link" href="?cards_page={{ all_cards.number }}&deck_page=1">&laquo; first</a>
+            <a class="link" href="?cards_page={{ all_cards.number }}&deck_page={{ deck_cards.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="current">
+            Page {{ deck_cards.number }} of {{ deck_cards.paginator.num_pages }}.
+        </span>
+        {% if deck_cards.has_next %}
+            <a class="link" href="?cards_page={{ all_cards.number }}&deck_page={{deck_cards.next_page_number}}">next</a>
+            <a class="link" href="?cards_page={{ all_cards.number }}&deck_page={{deck_cards.paginator.num_pages}}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+
+
+
+<div>
+    <div class="results" id="card-container" method="GET" action="{% url 'deck_edit' slug=deck.slug %}">
+    </div>
+</div>
+
+
+
+{% comment %} <div class="card-container">
+    <div class="all-cards">
+        <p class="edit-deck-title">All Cards</p>
+        {% for card in all_cards %}
+            <div class="edit-deck-stack">
+                <div class="scene">
+                    <div class="card">
+                    {% if card in all_deck_cards %}
+                        {% if card.front_image_path %}
+                            <div class="card__face if-card-face-front" style="background: url('{{ card.front_image_path }}'); background-size:contain; background-repeat: no-repeat; background-position: center;">
+                            </div>
+                        {% else %}
+                            <div class="card__face if-card-face-front">
+                                <br> {{ card.front }}
+                                <br> <div class = "card-category">{{ card.category }}</div>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        {% if card.front_image_path %}
+                            <div class="card__face card__face--front" style="background: url('{{ card.front_image_path }}'); background-size:contain; background-repeat: no-repeat; background-position: center;">
+                            </div>
+                        {% else %}
+                            <div class="card__face card__face--front">
+                                <br> {{ card.front }}
+                                <br> <div class = "card-category">{{ card.category }}</div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if card in all_deck_cards %}
+                        <div class="card__face if-card-face-back">
+                            <br> {{ card.back }}
+                        </div>
+                    {% else %}
+                        <div class="card__face card__face--back">
+                            <br> {{ card.back }}
+                        </div>
+                    {% endif %}
+                    </div>
+                </div>
+                <div>
+                    <form action="{% url 'add_or_remove' slug=deck.slug card_slug=card.slug %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="fav-deck-btn">
+                        {% if  card in all_deck_cards %}
+                            Remove
+                        {% else %}
+                            Add
+                        {% endif %}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        {% load static %}
+        <script src="{% static 'js/flip.js' %}" defer></script>
+        {% endfor %}
+    </div>
+
+    <div class="all-cards">
+        <p class="edit-deck-title">Cards in Deck</p>
+        {% for card in deck_cards %}
+                <div class="scene">
+                    <div class="card">
+                        {% if card.front_image_path %}
+                            <div class="card__face card__face--front" style="background: url('{{ card.front_image_path }}'); background-size:contain; background-repeat: no-repeat; background-position: center;">
+                            </div>
+                        {% else %}
+                            <div class="card__face card__face--front">
+                                <br> {{ card.front }}
+                                <br> <div class = "card-category">{{ card.category }}</div>
+                            </div>
+                        {% endif %}
+                        <div class="card__face card__face--back">
+                            <br> {{ card.back }}
+                        </div>
+                    </div>
+                </div>
+        {% load static %}
+        <script src="{% static 'js/flip.js' %}" defer></script>
+        {% endfor %}
+    </div>
+</div> {% endcomment %}
+<script src="{% static 'js/edit.js' %}" defer></script>
+{% endblock %}

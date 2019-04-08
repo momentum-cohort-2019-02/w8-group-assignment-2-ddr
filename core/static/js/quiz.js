@@ -30,7 +30,11 @@ document.addEventListener('DOMContentLoaded', function () {
   box5div.classList.add('quiz-boxes')
   gameStatus.appendChild(box5div)
 
-  fetch(correctCardForm.action, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+  fetch(correctCardForm.action, {
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    })
     .then(response => response.json())
     .then(function (response) {
       deckDict = response
@@ -97,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // console.log(box1, box2, box3, box4, box5)
   })
 
-  function refillAvailableCards () {
+  function refillAvailableCards() {
     if (availableCards.length === 0) {
       if (box5.length === numberOfCards) {
         completeQuiz.innerHTML = `<div class="hooray">
@@ -123,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  function updateBoxes () {
+  function updateBoxes() {
     box1div.innerText = box1.length
     box2div.innerText = box2.length
     box3div.innerText = box3.length
@@ -147,8 +151,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  function shuffle (array) {
-    var currentIndex = array.length; var temporaryValue; var randomIndex
+  function shuffle(array) {
+    var currentIndex = array.length;
+    var temporaryValue;
+    var randomIndex
 
     // While there remain elements to shuffle...
     while (currentIndex !== 0) {
@@ -165,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return array
   }
 
-  function flipCard (div) {
+  function flipCard(div) {
     div.classList.remove('is-flipped')
   }
 })
