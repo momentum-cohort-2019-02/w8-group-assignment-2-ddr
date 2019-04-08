@@ -12,7 +12,8 @@ function sQa(selector) {
 document.addEventListener('DOMContentLoaded', function () {
     const card_div = document.querySelector('.card')
     let cardContainer = sQ('.card-container')
-    let add_remove = sQ('.add_remove')
+
+
     let url = `/core/decks/${ card_div.dataset.deckSlug }/edit/${ card_div.dataset.cardSlug }`
     console.log(card_div.dataset.thisUrl)
     console.log(url)
@@ -23,9 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const {
             target
         } = event;
-        // if (!target.matches('.add_remove')) {
-        //     return
-        // }
+        let add_remove = sQ('.add_remove')
+        if (!target.matches('.add_remove')) {
+            return
+        }
         event.preventDefault();
         promise = fetch(target.dataset.action, {
                 method: 'POST',
@@ -40,7 +42,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 return response.json()
             })
-        console.log(promise)
+            .then(function (response) {
+                console.log(response)
+                let cardSlug = sQ(`#card-${response['card-slug']}`)
+                console.log(response.values['card-slug'])
+                // console.log(`#card-${response[1]['card-slug']}`)
+                cardSlug.classList.toggle('if-card-face-front')
+            })
+
     })
 
 })

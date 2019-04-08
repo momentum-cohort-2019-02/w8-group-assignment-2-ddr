@@ -165,29 +165,29 @@ def add_or_remove_card(request, slug, card_slug):
     deck = get_object_or_404(Deck, slug=slug)
     deck_cards = deck.cards.all()
     cards = Card.objects.all()
-    data = {}
+    data = {'card-slug': card.slug}
     # data = {'all_cards': {}, 'deck_cards': {}}
-    data['all_cards'] = {}
-    data['deck_cards'] = {}
-    i = 0
-    x = 0
-    for card in cards:
-        data['all_cards'][i] = {
-            'front': card.front,
-            'back': card.back,
-            'front_image_path': card.front_image_path,
-            'card_category': card.category,
-        }
-        i += 1
+    # data['all_cards'] = {}
+    # data['deck_cards'] = {}
+    # i = 0
+    # x = 0
+    # for card in cards:
+    #     data['all_cards'][i] = {
+    #         'front': card.front,
+    #         'back': card.back,
+    #         'front_image_path': card.front_image_path,
+    #         'card_category': card.category,
+    #     }
+    #     i += 1
 
-    for card in deck_cards:
-        data['deck_cards'][x] = {
-            'front': card.front,
-            'back': card.back,
-            'front_image_path': card.front_image_path,
-            'card_category': card.category,
-        }
-        x += 1
+    # for card in deck_cards:
+    #     data['deck_cards'][x] = {
+    #         'front': card.front,
+    #         'back': card.back,
+    #         'front_image_path': card.front_image_path,
+    #         'card_category': card.category,
+    #     }
+    #     x += 1
 
     if request.is_ajax():
         return JsonResponse(data, content_type='application/json', safe=True)
