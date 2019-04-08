@@ -45,12 +45,12 @@
 {% endif %}
 
 <div class="card-container">
-    <div class="all-cards">
+    <div class="all-cards card-container">
         <p class="edit-deck-title">All Cards</p>
         {% for card in all_cards %}
             <div class="edit-deck-stack">
                 <div class="scene">
-                    <div class="card">
+                    <div class="card" data-card-slug="{{ card.slug }}" data-deck-slug="{{ deck.slug }}" data-this-url="{% url 'add_or_remove' slug=deck.slug card_slug=card.slug %}">
                     {% if card in all_deck_cards %}
                         {% if card.front_image_path %}
                             <div class="card__face if-card-face-front" style="background: url('{{ card.front_image_path }}'); background-size:contain; background-repeat: no-repeat; background-position: center;">
@@ -85,9 +85,9 @@
                     </div>
                 </div>
                 <div>
-                    <form action="{% url 'add_or_remove' slug=deck.slug card_slug=card.slug %}" method="POST">
+                    <form class="add_remove" action="{% url 'add_or_remove' slug=deck.slug card_slug=card.slug %}" method="POST">
                     {% csrf_token %}
-                    <button type="submit" class="fav-deck-btn">
+                    <button class="fav-deck-btn add_remove" type="submit" data-action="{% url 'add_or_remove' slug=deck.slug card_slug=card.slug %}">
                         {% if  card in all_deck_cards %}
                             Remove
                         {% else %}
@@ -126,4 +126,6 @@
         {% endfor %}
     </div>
 </div>
+    <script src="{% static 'js/bundle.js' %}" defer></script>
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script> {% endcomment %}
 {% endblock %}
